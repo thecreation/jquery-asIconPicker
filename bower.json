@@ -1,0 +1,17 @@
+{
+  "name": "jquery-asIconPicker",
+  "version": "0.1.0",
+  "main": "dist/jquery-asIconPicker.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.8.3",
+    "fontAwesome": "git@github.com:FortAwesome/Font-Awesome.git",
+    "jquery-asTooltip": "git@github.com:amazingSurge/jquery-asTooltip.git"
+  }
+}

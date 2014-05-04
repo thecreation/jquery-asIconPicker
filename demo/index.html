@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/prism.css">
+<link rel="stylesheet" href="../css/asIconPicker.css">
+<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/jquery-asTooltip.css">
+</head>
+<body>
+	<div id="toc"></div>
+    <div class="container">      
+        <h1>jQuery.asIconPicker</h1>
+        <section>
+            <h2>Examples</h2>
+            <p>You can pass these options as key/value object to $.asIconPicker() method. </p>
+            
+            <section>
+                <h3>default single</h3>
+                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-star&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-times&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-refresh&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-rocket&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-eye&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-tag&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-bookmark&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-heart&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-adn&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cloud-upload&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-phone-square&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cog&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-wrench&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-volume-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-left&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-thumbs-up&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.default').asIconPicker();
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <select id="default" name="default" class="default">
+                        <option>fa-user</option>
+                        <option>fa-search</option>
+                        <option>fa-caret-right</option>
+                        <option>fa-star</option>
+                        <option>fa-times</option>
+                        <option>fa-refresh</option>
+                        <option>fa-rocket</option>
+                        <option>fa-eye</option>
+                        <option>fa-tag</option>
+                        <option>fa-bookmark</option>
+                        <option>fa-heart</option>
+                        <option>fa-adn</option>
+                        <option>fa-cloud-upload</option>
+                        <option>fa-phone-square</option>
+                        <option>fa-cog</option>
+                        <option>fa-wrench</option>
+                        <option>fa-volume-down</option>
+                        <option>fa-caret-down</option>
+                        <option>fa-caret-up</option>
+                        <option>fa-caret-left</option>
+                        <option>fa-thumbs-up</option>
+                    </select>
+                </div>
+            </section>
+            <section>
+                <h3>Group</h3>
+                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;group&quot;&nbsp;name=&quot;group&quot;&nbsp;class=&quot;group&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;optgroup&nbsp;label=&quot;Weather&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-left&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-eye&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-tag&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cog&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-wrench&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-volume-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-thumbs-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/optgroup&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;optgroup&nbsp;label=&quot;Commerce&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-star&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-times&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-refresh&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-rocket&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-bookmark&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-heart&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-adn&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cloud-upload&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-phone-square&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/optgroup&gt;
+&lt;/select&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.group').asIconPicker();
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <select id="group" name="group" class="group">
+                        <optgroup label="Weather">
+                            <option>fa-caret-right</option>
+                            <option>fa-caret-down</option>
+                            <option>fa-caret-up</option>
+                            <option>fa-caret-left</option>
+                            <option>fa-eye</option>
+                            <option>fa-tag</option>
+                            <option>fa-cog</option>
+                            <option>fa-wrench</option>
+                            <option>fa-volume-down</option>
+                            <option>fa-thumbs-up</option>
+                        </optgroup>
+                        <optgroup label="Commerce">
+                            <option>fa-user</option>
+                            <option>fa-search</option>
+                            <option>fa-star</option>
+                            <option>fa-times</option>
+                            <option>fa-refresh</option>
+                            <option>fa-rocket</option>
+                            <option>fa-bookmark</option>
+                            <option>fa-heart</option>
+                            <option>fa-adn</option>
+                            <option>fa-cloud-upload</option>
+                            <option>fa-phone-square</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </section>
+            <section>
+                <h3>Load from TEXT input field</h3>
+                <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;default_input&quot;&gt;&lt;/input&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#default_input').asIconPicker(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']);
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <input type="text" name="input" id="default_input"></input>
+                </div>
+            </section>
+            <section>
+                <h3>Load from TEXT input field (Group)</h3>
+                <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#group_input').asIconPicker(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;[{'group':&nbsp;&nbsp;&nbsp;true,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label':&nbsp;&nbsp;&nbsp;'Weather',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'group':&nbsp;&nbsp;&nbsp;true,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label':&nbsp;&nbsp;&nbsp;'Weather',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <input type="text" name="input" id="group_input"></input>
+                </div>
+            </section>
+        </section>
+    </div> 
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.toc.min.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/jquery-asTooltip.js"></script>
+    <script src="js/jquery.scroll.js"></script>
+    <script src="../src/jquery-asIconPicker.js"></script>
+    <script>
+        $(document).ready(function(){
+            (function(){
+                $('#toc').toc();
+            })();
+            $('.default').asIconPicker();
+            $('.group').asIconPicker();
+            $('#default_input').asIconPicker({
+                source: ['fa-caret-right', 'fa-star', 'fa-heart', 'fa-cloud-upload', 'fa-phone-square', 'fa-bookmark']
+            });
+            $('#group_input').asIconPicker({
+                source: [{'group':   true,
+                          'label':   'Weather',
+                          'options': ['fa-caret-right', 'fa-star', 'fa-heart', 'fa-cloud-upload', 'fa-phone-square', 'fa-bookmark']},
+                         {'group':   true,
+                          'label':   'Weather',
+                          'options': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
+                        }]
+            });
+        });
+    </script>
+</body>
+</html>

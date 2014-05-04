@@ -1,0 +1,162 @@
+.asTooltip_skin-dream {
+  position: relative;
+  display: inline-block;
+}
+
+.asTooltip_skin-dream .asTooltip-arrow {
+  position: absolute;
+  z-index: -1;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #434240;
+  -webkit-transform: rotate(45deg);
+     -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+       -o-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.asTooltip_skin-dream .asTooltip-content {
+  display: inline-block;
+  max-width: 199px;
+  padding: 10px;
+  font-size: 15px;
+  color: #fff;
+  -webkit-text-shadow: 1px -1px 1px #777777;
+     -moz-text-shadow: 1px -1px 1px #777777;
+          text-shadow: 1px -1px 1px #777777;
+  background-color: #434240;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+.asTooltip_skin-dream.asTooltip-n .asTooltip-arrow {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -10px;
+}
+
+.asTooltip_skin-dream.asTooltip-s .asTooltip-arrow {
+  top: -4px;
+  left: 50%;
+  margin-left: -10px;
+}
+
+.asTooltip_skin-dream.asTooltip-w .asTooltip-arrow {
+  top: 50%;
+  right: -4px;
+  margin-top: -10px;
+}
+
+.asTooltip_skin-dream.asTooltip-e .asTooltip-arrow {
+  top: 50%;
+  left: -4px;
+  margin-top: -10px;
+}
+
+.asTooltip_skin-dream.asTooltip-ne .asTooltip-arrow {
+  bottom: -4px;
+  left: 9px;
+}
+
+.asTooltip_skin-dream.asTooltip-nw .asTooltip-arrow {
+  right: 9px;
+  bottom: -4px;
+}
+
+.asTooltip_skin-dream.asTooltip-se .asTooltip-arrow {
+  top: -4px;
+  left: 9px;
+}
+
+.asTooltip_skin-dream.asTooltip-sw .asTooltip-arrow {
+  top: -4px;
+  right: 9px;
+}
+
+
+
+.asTooltip_sea.asTooltip-container {
+  max-width: 250px;
+  opacity: 0.5;
+}
+
+.asTooltip_sea.asTooltip-container .asTooltip-content {
+  padding: 10px;
+  color: #fff;
+  background-color: #4C4C4C;
+  border-radius: 5px;
+}
+
+.asTooltip_sea.asTooltip-container .asTooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.asTooltip_sea.asTooltip-container .asTooltip-loading {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url(../img/asTooltip-loading.gif) no-repeat scroll 0 0 transparent;
+}
+
+.asTooltip_sea.asTooltip-n {
+  padding-bottom: 10px;
+}
+
+.asTooltip_sea.asTooltip-n .asTooltip-arrow {
+  border-top: 10px solid #4C4C4C;
+}
+
+.asTooltip_sea.asTooltip-s {
+  padding-top: 10px;
+}
+
+.asTooltip_sea.asTooltip-s .asTooltip-arrow {
+  border-bottom: 10px solid #000;
+}
+
+.asTooltip_sea.asTooltip-w {
+  padding-left: 10px;
+}
+
+.asTooltip_sea.asTooltip-w .asTooltip-arrow {
+  border-right: 10px solid #000;
+}
+
+.asTooltip_sea.asTooltip-e {
+  padding-right: 10px;
+}
+
+.asTooltip_sea.asTooltip-e .asTooltip-arrow {
+  border-left: 10px solid #000;
+}
+
+.asTooltip_sea.asTooltip-ne {
+  padding-bottom: 10px;
+}
+
+.asTooltip_sea.asTooltip-nw {
+  padding-bottom: 10px;
+}
+
+.asTooltip_sea.asTooltip-nw .asTooltip-arrow {
+  right: 0;
+  bottom: -10px;
+  border-top: 10px solid #000;
+}
+
+.asTooltip_sea.asTooltip-se {
+  padding-top: 10px;
+}
+
+.asTooltip_sea.asTooltip-sw {
+  padding-top: 10px;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
