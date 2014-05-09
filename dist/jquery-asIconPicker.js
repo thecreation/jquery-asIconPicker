@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-05-04
+/*! asIconPicker - v0.1.0 - 2014-05-09
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -8,24 +8,31 @@
     var pluginName = 'asIconPicker',
         defaults = {
             namespace: 'asIconPicker',
-            source:         false,      // Icons source
-            tooltip:        true,
+            source:           false,      // Icons source
+            tooltip:          true,
+            hasSearch:        true,
+            extraClass:       'fa',
+            iconPrefix:       'fa-',
+            emptyText:        'None Selected',
+            cancelSelected:   true,
 
             iconPicker: function() {
                 return  '<div class="namespace-selector">' +
                             '<span class="namespace-selected-icon">' +
-                                '<i class="fa fa-ban"></i>None selected' +
+                                'None selected' +
                             '</span>' +
-                            '<span class="namespace-selector-button">' +
-                                '<i class="fa fa-caret-down"></i>' +
+                            '<span class="namespace-selector-arrow">' +
+                                '<i></i>' +
                             '</span>' +
                         '</div>' +
                         '<div class="namespace-selector-popup">' +
-                            '<div class="namespace-selector-search">' +
-                                '<input type="text" name="" value="" placeholder="Search" class="icons-search-input"/>' +
-                                '<i class="fa fa-search"></i>' +
-                            '</div>' +
                             '<div class="namespace-icons-container"></div>' +
+                        '</div>';
+            },
+            iconSearch: function() {
+                return  '<div class="namespace-selector-search">' +
+                            '<input type="text" name="" value="" placeholder="Search" class="namespace-search-input"/>' +
+                            '<i class="asIcon-search"></i>' +
                         '</div>';
             },
             // callback
@@ -46,20 +53,29 @@
         this.classes = {
             disabled: this.namespace + '_disabled',
             wrapper: this.namespace + '-wrapper',
+            search: this.namespace + '_with_search',
+            active: this.namespace + '_active',
+            hide: this.namespace + '_hide',
+            hover: this.namespace + '_hover',
             mask: this.namespace + '-mask'
         };
 
         this.$element.addClass(this.namespace);
         this.$element.wrap('<div class="' + this.classes.wrapper + '"></div>');
+        this.$wrapper = this.$element.parent();
 
-        var iconPicker = this.options.iconPicker().replace(/namespace/g, this.namespace);
+        var iconPicker = this.options.iconPicker().replace(/namespace/g, this.namespace),
+            iconSearch = this.options.iconSearch().replace(/namespace/g, this.namespace);
         this.$iconPicker = $(iconPicker);
-        this.$searchIcon = this.$iconPicker.find('.' + this.namespace + '-selector-search i');
         this.$iconContainer = this.$iconPicker.find('.' + this.namespace + '-icons-container');
-        this.iconsSearched = [];
-        this.isSearch = false;
-        this.currentIcon = false;
-        this.open = false;
+
+        if (this.options.hasSearch) {
+            this.$iconContainer.before($(iconSearch));
+            this.$iconContainer.parent().addClass(this.classes.search);
+            this.$searchIcon = this.$iconPicker.find('.' + this.namespace + '-selector-search i');
+            this.iconsSearched = [];
+            this.isSearch = false;
+        }
 
         // flag
         this.disabled = false;
@@ -83,54 +99,69 @@
             if (!this.options.source && this.$element.is('select')) {
                 this.options.source = [];
                 this.$element.children().each($.proxy(function (i, el) {
+                    var item = [];
                     if (el.tagName.toLowerCase() === 'optgroup') {
                         var group = $.extend({}, $(el).data(), {
-                            'group': true,
                             'label': el.label,
                             'options': []
                         });
-                        $(el).children().each(function() {
-                            group.options.push($(this).val());
-                        });
+                        for (var j = 0; j < $(el).children().length; j++) {
+                            item = [];
+                            item.value = $(el).children().eq(j).val();
+                            item.text = $(el).children().eq(j).text();
+                            group.options.push(item);
+                        }
                         self.options.source.push(group);
                     }else if ($(el).val()) {
-                        this.options.source.push($(el).val());
+                        item.value = $(el).val();
+                        item.text = $(el).text();
+                        this.options.source.push(item);
                     }
                 }, this));
             }
 
             // Load icons
-            this.loadIcon();
+            this.showLoading();
 
-            this.$iconContainer.parent().hide();
-
+            this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.namespace + '_hide');
             /**
              * On down arrow click
              */
-            this.$iconPicker.parent().find('.' + this.namespace + '-selector').click($.proxy(function () {
-
+            this.$wrapper.find('.' + this.namespace + '-selector').on('click', function () {
                 // Open/Close the icon picker
-                this.toggleIconSelector();
+                $(this).addClass(self.classes.active);
+                $(this).siblings('.' + self.namespace + '-selector-popup').addClass(self.classes.active).removeClass(self.classes.hide);
+                self.reset();
 
-            }, this));
+                if ($(this).hasClass(self.classes.active)) {
+                    self.$iconPicker.find('.' + self.namespace + '-search-input').focus().select();
+                    self.$mask = $('<div></div>').addClass(self.classes.mask).appendTo(self.$element.parent());
+                    self.$mask.on('click', function() {
+                        self._clearMask();
+                        self.$wrapper.find('.' + self.namespace + '-selector').removeClass(self.classes.active);
+                        self.$wrapper.find('.' + self.namespace + '-selector-popup').addClass(self.classes.hide).removeClass(self.classes.active);
+                    });
+                }
+            });
 
             /**
              * Realtime Icon Search
              */
-            this.$iconPicker.find('.icons-search-input').keyup($.proxy(function (e) {
+            this.$iconPicker.find('.' + this.namespace + '-search-input').keyup($.proxy(function (e) {
 
                 // Get the search string
-                var searchString = $(e.currentTarget).val();
+                var searchString = $(e.currentTarget).val(),
+                    current = '';
 
                 // If the string is not empty
                 if (searchString === '') {
-                    this.resetSearch();
+                    this.reset();
                     return;
                 }
 
                 // Set icon search to X to reset search
-                this.$searchIcon.removeClass('fa-search');
-                this.$searchIcon.addClass('fa-times');
+                this.$searchIcon.removeClass('asIcon-search');
+                this.$searchIcon.addClass('asIcon-times');
 
                 // Set this as a search
                 this.isSearch = true;
@@ -138,29 +169,53 @@
 
                 // Actual search
                 for (var i = 0, item; item = this.options.source[i]; i++) {
-                    if (item.group) {
+                    if (typeof item.label !== 'undefined') {
                         var iconsSearched = [];
-                        iconsSearched.group = true;
                         iconsSearched.label = item.label;
                         iconsSearched.options = $.grep(item.options, function(n){
-                            return n.search(searchString.toLowerCase()) >= 0;
+                            return (n.value || n).search(searchString.toLowerCase()) >= 0;
                         });
                         if (iconsSearched.options.length > 0) {
                             this.iconsSearched.push(iconsSearched);
+                            current = this.iconsSearched[0].options[0].value || this.iconsSearched[0].options[0];
                         }
                     }else {
-                        item.search(searchString.toLowerCase()) >= 0 ? this.iconsSearched.push(item) : 0;
+                        item.value.search(searchString.toLowerCase()) >= 0 ? this.iconsSearched.push(item) : 0;
+                        if (this.iconsSearched.length > 0) {
+                            current = this.iconsSearched[0].value;
+                        }
                     }
                 }
 
                 // Render icon list
-                this.fillIconContainer();
+                this.fillIcon();
+
+                if (this.iconsSearched.length > 0) {
+                    this.current = current;
+                    this.select();
+                }
             }, this));
 
-            this.$iconContainer.on('click', '.fa-box', $.proxy(function (e) {
-                this.setSelectedIcon($(e.currentTarget).find('i').attr('class'));
-                this.toggleIconSelector();
+            this.$iconPicker.find('.' + this.namespace + '-selector-search').on('click', '.asIcon-times', $.proxy(function () {
+                this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
+                this.reset();
             }, this));
+
+            this.$iconContainer.on('click', '.' + this.namespace + '-list li', $.proxy(function(e) {
+                if (this.options.cancelSelected && $(e.currentTarget).hasClass(this.namespace + '-current')) {
+                    $(e.currentTarget).removeClass(this.namespace + '-current');
+                    this.set();
+                    return;
+                }
+                this.set($(e.currentTarget).data('class'));
+                this._clearMask();
+                this.$wrapper.find('.' + this.namespace + '-selector').removeClass(this.classes.active);
+                this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide).removeClass(this.classes.active);
+            },this)).on('mouseenter', '.' + this.namespace + '-list li', $.proxy(function(e) {
+                this.highlight($(e.currentTarget).data('class'));
+            },this)).on('mouseleave', '.' + this.namespace + '-list li', $.proxy(function(e) {
+                this.highlight();
+            },this));
 
             /**
              * Stop click propagation on iconpicker
@@ -174,21 +229,21 @@
             // after init end trigger 'ready'
             this._trigger('ready');
         },
-        loadIcon: function() {
-            this.$iconContainer.html('<i class="fa fa-spinner animate-spin loading"></i>');
+        showLoading: function() {
+            this.$iconContainer.html('<i class="' + this.namespace + 'loading"></i>');
 
             // If source is set
             if (this.options.source instanceof Array) {
 
                 // Render icons
-                this.fillIconContainer();
+                this.fillIcon();
             }
         },
 
         /**
          * Fill icons inside the popup
          */
-        fillIconContainer: function() {
+        fillIcon: function() {
             if(typeof this.$iconContainer.data('scroll') !=='undefined'){
                 this.$iconContainer.scrollable('destory');
             } 
@@ -204,7 +259,7 @@
 
             // If not show an error when no icons are found
             if (iconsContainer.length < 1) {
-                this.$iconContainer.html('<span class="icons-picker-error"><i class="fa fa-ban"></i></span>');
+                this.$iconContainer.html('<span class="' + this.namespace + '-error"><i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban"></i></span>');
                 return;
 
             // else empty the container
@@ -214,30 +269,32 @@
 
             // List icons
             for (var i = 0, item; item = iconsContainer[i]; i++) {
-                if (item.group) {
+                if (typeof item.label !== 'undefined') {
                     if (item.options.length) {
-                        var $group = $('<div class="' + this.namespace + '-group"><p>' + item.label + ':</p></div>').appendTo(this.$iconContainer);
+                        var $group = $('<div class="' + this.namespace + '-group"><div class="' + this.namespace + '-group-label">' + item.label + ':</div><ul class="' + this.namespace + '-list"></ul></div>').appendTo(this.$iconContainer);
                     }
                     for (var j = 0, option; option = item.options[j]; j++) {
-                        $('<span/>', {
-                            html:      '<i class="fa ' + option + '"></i>',
-                            'class':   'fa-box',
-                            'title':   (this.options.tooltip) ? option : ''
-                        }).appendTo($group);
+                        $('<li/>', {
+                            html:      '<i class="' + this.options.extraClass + ' ' + (option.value || option)+ '"></i>',
+                            'title':   (this.options.tooltip) ? (option.text || option) : ''
+                        }).data('class', (option.value || option)).appendTo($group.find('ul'));
                         iconsAll.push(option);
                     }
                 } else {
-                    $('<span/>', {
-                        html:      '<i class="fa ' + item + '"></i>',
-                        'class':   'fa-box',
-                        'title':   (this.options.tooltip) ? item : ''
-                    }).appendTo(this.$iconContainer);
+                    var listClass = this.$iconContainer.children().last().attr('class');
+                    if (listClass !== this.namespace + '-list') {
+                        $('<ul class="' + this.namespace + '-list"></ul>').appendTo(this.$iconContainer);
+                    }
+                    $('<li/>', {
+                        html:      '<i class="' + this.options.extraClass + ' '  + (item.value || item) + '"></i>',
+                        'title':   (this.options.tooltip) ? (item.text || item) : ''
+                    }).data('class', (item.value || item)).appendTo(this.$iconContainer.children().last());
                     iconsAll.push(item);
                 }
             }
             if (this.options.tooltip) {
                 $.asTooltip.closeAll();
-                this.$iconContainer.find('.fa-box').asTooltip({
+                this.$iconContainer.find('.' + this.namespace + '-list li').asTooltip({
                     namespace: 'asTooltip',
                     skin: 'skin-dream',
                     onlyOne: true
@@ -247,12 +304,12 @@
             if ($.inArray(this.$element.val(), iconsAll) === -1) {
 
                 // Set empty
-                this.setSelectedIcon();
+                this.set();
 
             } else {
 
                 // Set the default selected icon even if not set
-                this.setSelectedIcon('fa ' + this.$element.val());
+                this.set(this.$element.val());
             }
 
             // Add the scrollbar in the iconContainer
@@ -261,52 +318,44 @@
 
             this._trigger('afterFill');
         },
-        setHighlightedIcon: function () {
-            this.$iconContainer.find('.current-icon').removeClass('current-icon');
-            if (this.currentIcon) {
-                this.$iconContainer.find('.' + this.currentIcon).parent('span').addClass('current-icon');
+        highlight: function(icon) {
+            if (icon) {
+                this.$iconPicker.find('.' + icon).parent().addClass(this.classes.hover);
+            }else {
+                this.$iconPicker.find('.' + this.classes.hover).removeClass(this.classes.hover);
+            }
+        },
+        select: function () {
+            this.$iconContainer.find('.' + this.namespace + '-current').removeClass(this.namespace + '-current');
+            if (this.current) {
+                this.$iconContainer.find('.' + this.current).parent('li').addClass(this.namespace + '-current');
             }
         },
 
-        setSelectedIcon: function(icon) {
-            var iconName = '';
+        set: function(icon) {
             if (icon) {
-                iconName = icon.match(/fa-+\S*/g);
+                this.$iconPicker.find('.' + this.namespace + '-selected-icon').removeClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + icon + '"></i>' + icon);
+            }else {
+                this.$iconPicker.find('.' + this.namespace + '-selected-icon').addClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban' + '"></i>' + this.options.emptyText);
             }
-            this.$iconPicker.find('.' + this.namespace + '-selected-icon').html('<i class="' + (icon || 'fa fa-ban ' + this.namespace + '-none-selected') + '"></i>' + (iconName || 'None selected'));
+
             // Set the value of the element and trigger change event
             this.$element.val(icon).triggerHandler('change');
-            this.currentIcon = iconName;
-            this.setHighlightedIcon();
+            this.current = icon;
+            this.select();
         },
 
-        toggleIconSelector: function () {
-            var self = this;
-            this.open = (!this.open) ? 1 : 0;
-            this.$iconPicker.parent().find('.' + this.namespace + '-selector-popup').slideToggle(300);
-            this.$iconPicker.find('.' + this.namespace + '-selector-button i').toggleClass('fa-caret-up');
-            this.$iconPicker.find('.' + this.namespace + '-selector-button i').toggleClass('fa-caret-down');
-            this._clearMask();
-            if (this.open) {
-                this.$iconPicker.find('.icons-search-input').focus().select();
-                this.$mask = $('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
-                this.$mask.on('click', function() {
-                    self.toggleIconSelector();
-                    return false;
-                });
-            }
-        },
-        resetSearch: function() {
+        reset: function() {
             // Empty input
-            this.$iconPicker.find('.icons-search-input').val('');
+            this.$iconPicker.find('.' + this.namespace + '-search-input').val('');
 
             // Reset search icon class
-            this.$searchIcon.removeClass('fa-times');
-            this.$searchIcon.addClass('fa-search');
+            this.$searchIcon.removeClass('asIcon-times');
+            this.$searchIcon.addClass('asIcon-search');
             this.isSearch = false;
 
             // Fill icons
-            this.fillIconContainer();
+            this.fillIcon();
 
             // Add the scrollbar in the iconContainer
             if (this.$iconContainer.outerHeight() >= 290) {
@@ -339,7 +388,7 @@
             this.disabled = false;
 
             // which element is up to your requirement
-            this.$element.removeClass(this.classes.disabled);
+            this.$wrapper.removeClass(this.classes.disabled);
 
             // here maybe have some events detached
         },
@@ -347,7 +396,7 @@
             this.disabled = true;
             // which element is up to your requirement
             // .disabled { pointer-events: none; } NO SUPPORT IE11 BELOW
-            this.$element.addClass(this.classes.disabled);
+            this.$wrapper.addClass(this.classes.disabled);
 
             // here maybe have some events attached
         },

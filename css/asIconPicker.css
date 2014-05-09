@@ -1,3 +1,144 @@
+@font-face {
+  font-family: 'asFont';
+  src: url('../fonts/asFont.eot');
+  src: url('../fonts/asFont.eot') format('embedded-opentype'), url('../fonts/asFont.woff') format('woff'), url('../fonts/asFont.ttf') format('truetype'), url('../fonts/asFont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="asIcon-"],
+[class*=" asIcon-"] {
+  font-family: 'asFont';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.asIcon-search:before {
+  content: "\e600";
+}
+.asIcon-chevron-right:before {
+  content: "\e601";
+}
+.asIcon-chevron-left:before {
+  content: "\e602";
+}
+.asIcon-check:before {
+  content: "\e603";
+}
+.asIcon-caret-down:before {
+  content: "\e604";
+}
+.asIcon-calendar:before {
+  content: "\e606";
+}
+.asIcon-caret-up:before {
+  content: "\e605";
+}
+.asIcon-text_left:before {
+  content: "\e608";
+}
+.asIcon-text_center:before {
+  content: "\e609";
+}
+.asIcon-text_right:before {
+  content: "\e60a";
+}
+.asIcon-unsorted:before {
+  content: "\e607";
+}
+.asIcon-text_lowercase:before {
+  content: "\e60d";
+}
+.asIcon-font_italy:before {
+  content: "\e60b";
+}
+.asIcon-text_uppercase:before {
+  content: "\e60c";
+}
+.asIcon-text_underline:before {
+  content: "\e60e";
+}
+.asIcon-text_linethrough:before {
+  content: "\e610";
+}
+.asIcon-text_capitalize:before {
+  content: "\e60f";
+}
+.asIcon-angle-up:before {
+  content: "\e611";
+}
+.asIcon-angle-down:before {
+  content: "\e612";
+}
+.asIcon-no-repeat:before {
+  content: "\e613";
+}
+.asIcon-repeat:before {
+  content: "\e614";
+}
+.asIcon-repeat-y:before {
+  content: "\e616";
+}
+.asIcon-repeat-x:before {
+  content: "\e615";
+}
+.asIcon-bg-top-left:before {
+  content: "\e617";
+}
+.asIcon-bg-top-center:before {
+  content: "\e618";
+}
+.asIcon-bg-top-right:before {
+  content: "\e619";
+}
+.asIcon-bg-center-left:before {
+  content: "\e61a";
+}
+.asIcon-bg-center-center:before {
+  content: "\e61b";
+}
+.asIcon-bg-center-right:before {
+  content: "\e61c";
+}
+.asIcon-bg-bottom-left:before {
+  content: "\e61d";
+}
+.asIcon-bg-bottom-center:before {
+  content: "\e61e";
+}
+.asIcon-bg-bottom-right:before {
+  content: "\e61f";
+}
+.asIcon-adapt-height:before {
+  content: "\e620";
+}
+.asIcon-adapt-width:before {
+  content: "\e621";
+}
+.asIcon-adapt-auto:before {
+  content: "\e622";
+}
+.asIcon-adapt-all:before {
+  content: "\e623";
+}
+.asIcon-image:before {
+  content: "\e624";
+}
+.asIcon-file:before {
+  content: "\e625";
+}
+.asIcon-minus:before {
+  content: "\e626";
+}
+.asIcon-times:before {
+  content: "\e627";
+}
 .asIconPicker-wrapper {
   position: relative;
   display: inline-block;
@@ -8,26 +149,50 @@
 }
 .asIconPicker-selector {
   position: relative;
-  border: 2px solid #5cafda;
+  border: 2px solid #bbb;
 }
 .asIconPicker-selector .asIconPicker-selected-icon {
   display: block;
   padding: 6px 40px 7px 14px;
+  font-size: 16px;
 }
 .asIconPicker-selector .asIconPicker-selected-icon > i {
+  font-size: 18px;
   margin-right: 10px;
+  vertical-align: text-top;
 }
-.asIconPicker-selector .asIconPicker-selector-button {
+.asIconPicker-selector .asIconPicker-selector-arrow {
   position: absolute;
   top: 0;
   right: 0;
   width: 40px;
   height: 100%;
 }
-.asIconPicker-selector .asIconPicker-selector-button > i {
+.asIconPicker-selector .asIconPicker-selector-arrow > i {
   position: absolute;
-  top: 7px;
-  right: 15px;
+  top: 9px;
+  right: 10px;
+  color: #bbb;
+  font-family: 'asFont';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.asIconPicker-selector .asIconPicker-selector-arrow > i:before {
+  content: "\e604";
+}
+.asIconPicker-selector.asIconPicker_active {
+  border: 2px solid #5cafda;
+}
+.asIconPicker-selector.asIconPicker_active .asIconPicker-selector-arrow > i:before {
+  content: "\e605";
 }
 .asIconPicker-none-selected {
   color: #ddd;
@@ -44,6 +209,19 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.asIconPicker_active {
+  display: block !important;
+}
+.asIconPicker_hide {
+  display: none !important;
+}
+.asIconPicker_disable {
+  background-color: #eee;
+  pointer-events: none !important;
+}
+.asIconPicker_disable .asIconPicker-selector {
+  border-color: #ddd;
+}
 .asIconPicker-selector-search {
   position: absolute;
   top: 0;
@@ -56,10 +234,8 @@
   width: calc(100% - 20px);
   padding: 10px;
   background-color: #fff;
-  -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
-.asIconPicker-selector-search .icons-search-input {
+.asIconPicker-selector-search .asIconPicker-search-input {
   width: 100%;
   height: 100%;
   padding-right: 40px;
@@ -73,10 +249,11 @@
 }
 .asIconPicker-selector-search > i {
   position: absolute;
-  top: 18px;
+  top: 17px;
   right: 23px;
   color: rgba(0, 0, 0, 0.2);
-  font-size: 16px;
+  font-size: 20px;
+  cursor: pointer;
 }
 .asIconPicker-icons-container {
   width: 100%;
@@ -98,13 +275,18 @@
 .asIconPicker-icons-container .asIconPicker-group:last-child {
   margin-bottom: 0;
 }
-.asIconPicker-icons-container .asIconPicker-group p {
-  margin-top: 0;
+.asIconPicker-icons-container .asIconPicker-group .asIconPicker-group-label {
   margin-bottom: 9px;
   color: #777;
   font-size: 16px;
 }
-.asIconPicker-icons-container .fa-box {
+.asIconPicker-icons-container .asIconPicker-list {
+  margin: 0;
+  padding: 0;
+}
+.asIconPicker-icons-container .asIconPicker-list li {
+  position: relative;
+  z-index: 1;
   display: inline-block;
   width: 55px;
   width: -webkit-calc(20% - 1px);
@@ -114,21 +296,24 @@
   margin-left: -1px;
   line-height: 55px;
   color: #9ea6a9;
+  list-style: none;
   text-align: center;
   border: 1px solid #f2f2f2;
   cursor: pointer;
 }
-.asIconPicker-icons-container .fa-box.current-icon {
+.asIconPicker-icons-container .asIconPicker-list li.asIconPicker-current {
+  z-index: 9;
+  color: #fff;
   background-color: #5cafda;
+  border-color: #5cafda;
+}
+.asIconPicker-icons-container .asIconPicker-list li.asIconPicker-current:hover {
   color: #fff;
 }
-.asIconPicker-icons-container .fa-box.current-icon:hover {
-  color: #fff;
-}
-.asIconPicker-icons-container .fa-box:hover {
+.asIconPicker-icons-container .asIconPicker-list li.asIconPicker_hover {
   color: #6a6f76;
 }
-.asIconPicker-icons-container .icons-picker-error {
+.asIconPicker-icons-container .asIconPicker-error {
   display: block;
   width: 55px;
   height: 55px;

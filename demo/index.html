@@ -118,29 +118,29 @@
                 <div class="example">
                     <select id="group" name="group" class="group">
                         <optgroup label="Weather">
-                            <option>fa-caret-right</option>
-                            <option>fa-caret-down</option>
-                            <option>fa-caret-up</option>
-                            <option>fa-caret-left</option>
-                            <option>fa-eye</option>
-                            <option>fa-tag</option>
-                            <option>fa-cog</option>
-                            <option>fa-wrench</option>
-                            <option>fa-volume-down</option>
-                            <option>fa-thumbs-up</option>
+                            <option value="fa-caret-right">Caret-right</option>
+                            <option value="fa-caret-down">Caret-down</option>
+                            <option value="fa-caret-up">Caret-up</option>
+                            <option value="fa-caret-left">Caret-left</option>
+                            <option value="fa-eye">Eye</option>
+                            <option value="fa-tag">Tag</option>
+                            <option value="fa-cog">Cog</option>
+                            <option value="fa-wrench">Wrench</option>
+                            <option value="fa-volume-down">Volume-down</option>
+                            <option value="fa-thumbs-up">Thumbs-up</option>
                         </optgroup>
                         <optgroup label="Commerce">
-                            <option>fa-user</option>
-                            <option>fa-search</option>
-                            <option>fa-star</option>
-                            <option>fa-times</option>
-                            <option>fa-refresh</option>
-                            <option>fa-rocket</option>
-                            <option>fa-bookmark</option>
-                            <option>fa-heart</option>
-                            <option>fa-adn</option>
-                            <option>fa-cloud-upload</option>
-                            <option>fa-phone-square</option>
+                            <option value="fa-user">User</option>
+                            <option value="fa-search">Search</option>
+                            <option value="fa-star">Star</option>
+                            <option value="fa-times">Times</option>
+                            <option value="fa-refresh">Refresh</option>
+                            <option value="fa-rocket">Rocket</option>
+                            <option value="fa-bookmark">Bookmark</option>
+                            <option value="fa-heart">Heart</option>
+                            <option value="fa-adn">Adn</option>
+                            <option value="fa-cloud-upload">Cloud-upload</option>
+                            <option value="fa-phone-square">Phone-square</option>
                         </optgroup>
                     </select>
                 </div>
@@ -193,14 +193,23 @@
             $('.default').asIconPicker();
             $('.group').asIconPicker();
             $('#default_input').asIconPicker({
-                source: ['fa-caret-right', 'fa-star', 'fa-heart', 'fa-cloud-upload', 'fa-phone-square', 'fa-bookmark']
+                source: [{'value': 'fa-caret-right',
+                          'text': 'Caret-right'},
+                         {'value': 'fa-star',
+                          'text': 'Star'},
+                         {'value': 'fa-heart',
+                          'text': 'Heart'},
+                         {'value': 'fa-cloud-upload',
+                          'text': 'Cloud-upload'},
+                         {'value': 'fa-phone-square',
+                          'text': 'Phone-square'},
+                         {'value': 'fa-bookmark',
+                          'text': 'Bookmark'}]
             });
             $('#group_input').asIconPicker({
-                source: [{'group':   true,
-                          'label':   'Weather',
+                source: [{'label':   'Weather',
                           'options': ['fa-caret-right', 'fa-star', 'fa-heart', 'fa-cloud-upload', 'fa-phone-square', 'fa-bookmark']},
-                         {'group':   true,
-                          'label':   'Weather',
+                         {'label':   'Weather',
                           'options': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
                         }]
             });
