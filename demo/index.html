@@ -173,8 +173,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
+                <div class="example" id="api-get-info">
                     <input type="text" name="input" id="group_input"></input>
+                    <button id="api-get-click">getIcon</button>
                 </div>
             </section>
         </section>
@@ -183,7 +184,7 @@
     <script src="js/jquery.toc.min.js"></script>
     <script src="js/prism.js"></script>
     <script src="js/jquery-asTooltip.js"></script>
-    <script src="js/jquery.scroll.js"></script>
+    <script src="js/jquery-asScrollbar.min.js"></script>
     <script src="../src/jquery-asIconPicker.js"></script>
     <script>
         $(document).ready(function(){
@@ -212,6 +213,12 @@
                          {'label':   'Weather',
                           'options': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
                         }]
+            });
+            $('#api-get-click').click(function() {
+                var html = '<div>' + $('#group_input').asIconPicker('get') + '</div>';
+                console.log($('#group_input').asIconPicker('get'));
+                $(html).prependTo($('#api-get-info'));
+                return false;
             });
         });
     </script>

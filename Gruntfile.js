@@ -44,6 +44,15 @@ module.exports = function(grunt) {
           dest: 'demo/css/jquery-asTooltip.css'
         }]
       },
+      jquery_asScrollbar: {
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: 'bower_components/jquery-asScrollbar/dist',
+          src: 'jquery-asScrollbar.min.js',
+          dest: 'demo/js'
+        }]
+      },
     },
     concat: {
       options: {

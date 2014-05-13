@@ -235,6 +235,11 @@
   padding: 10px;
   background-color: #fff;
 }
+.asIconPicker-selector-search.asIconPicker-search-shadow {
+  -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
+  -web-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
+}
 .asIconPicker-selector-search .asIconPicker-search-input {
   width: 100%;
   height: 100%;
@@ -263,10 +268,10 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.asIconPicker-icons-container .wrapper {
+.asIconPicker-icons-container .asIconPicker-icons-wrapper {
   max-height: 314px;
 }
-.asIconPicker-icons-container .content {
+.asIconPicker-icons-container .asIconPicker-icons-content {
   padding: 10px;
 }
 .asIconPicker-icons-container .asIconPicker-group {
