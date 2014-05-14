@@ -1,0 +1,20 @@
+[
+	{"value": "fa-caret-right",
+	  "text": "Caret-right"
+	},
+	{"value": "fa-star",
+	  "text": "Star"
+	},
+	{"value": "fa-heart",
+	  "text": "Heart"
+	},
+	{"value": "fa-cloud-upload",
+	  "text": "Cloud-upload"
+	},
+	{"value": "fa-phone-square",
+	  "text": "Phone-square"
+	},
+	{"value": "fa-bookmark",
+	  "text": "Bookmark"
+	}
+]

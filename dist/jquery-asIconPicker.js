@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-05-13
+/*! asIconPicker - v0.1.0 - 2014-05-14
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -281,7 +281,7 @@
             // Load icons
             this.showLoading();
 
-            this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.namespace + '_hide');
+            this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide);
             /**
              * On down arrow click
              */
@@ -353,7 +353,7 @@
             return parts;
         },
         showLoading: function() {
-            this.$iconContainer.html('<i class="' + this.namespace + 'loading"></i>');
+            this.$iconContainer.html('<span class="' + this.namespace + '-loading"><i></i></span>');
 
             // If source is set
             if (this.options.source instanceof Array) {
@@ -405,7 +405,7 @@
          */
         fillIcon: function() {
             if(typeof this.$iconContainer.data('scroll') !=='undefined'){
-                this.$iconContainer.scrollable('destory');
+                this.$iconContainer.asScrollable('destory');
             } 
             var iconsContainer = [];
             this.iconsAll = [];
@@ -534,7 +534,7 @@
 
             // Add the scrollbar in the iconContainer
             if (this.$iconContainer.outerHeight() >= 290) {
-                this.$iconContainer.scrollable();
+                this.$iconContainer.asScrollable();
             }
         },
         _hide: function() {
@@ -568,14 +568,19 @@
             }
         },
         load: function(source, extraClass) {
-            this.options.source = source;
+            if (typeof source !== 'undefined') {
+                this.options.source = source;
+            }
+
             if (extraClass === '') {
                 this.options.extraClass = '';
-            }else if (typeof extraClass === 'undefined') {
-                return;
-            }else {
+            }else if (typeof extraClass !== 'undefined') {
                 this.options.extraClass = extraClass;
             }
+
+            this.$wrapper.find('.' + this.namespace + '-selector-popup').removeClass(this.classes.hide);
+            this.showLoading();
+            this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide);
         },
         get: function() {
             var current;

@@ -19,13 +19,16 @@
 </head>
 <body>
 	<div id="toc"></div>
-    <div class="container">      
+    <div class="container">
+        <div id="toc0"></div>    
         <h1>jQuery.asIconPicker</h1>
         <section>
+            <div id="toc1"></div>
             <h2>Examples</h2>
             <p>You can pass these options as key/value object to $.asIconPicker() method. </p>
             
             <section>
+                <div id="toc2"></div>
                 <h3>default single</h3>
                 <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
@@ -82,33 +85,35 @@
                 </div>
             </section>
             <section>
+                <div id="toc3"></div>
                 <h3>Group</h3>
                 <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;group&quot;&nbsp;name=&quot;group&quot;&nbsp;class=&quot;group&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;optgroup&nbsp;label=&quot;Weather&quot;&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-down&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-up&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-left&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-eye&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-tag&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cog&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-wrench&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-volume-down&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-thumbs-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-caret-right&quot;&gt;Caret-right&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-caret-down&quot;&gt;Caret-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-caret-up&quot;&gt;Caret-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-caret-left&quot;&gt;Caret-left&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-eye&quot;&gt;Eye&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-tag&quot;&gt;Tag&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-cog&quot;&gt;Cog&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-wrench&quot;&gt;Wrench&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-volume-down&quot;&gt;Volume-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-thumbs-up&quot;&gt;Thumbs-up&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/optgroup&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;optgroup&nbsp;label=&quot;Commerce&quot;&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-star&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-times&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-refresh&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-rocket&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-bookmark&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-heart&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-adn&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cloud-upload&lt;/option&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-phone-square&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-user&quot;&gt;User&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-search&quot;&gt;Search&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-star&quot;&gt;Star&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-times&quot;&gt;Times&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-refresh&quot;&gt;Refresh&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-rocket&quot;&gt;Rocket&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-bookmark&quot;&gt;Bookmark&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-heart&quot;&gt;Heart&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-adn&quot;&gt;Adn&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-cloud-upload&quot;&gt;Cloud-upload&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-phone-square&quot;&gt;Phone-square&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/optgroup&gt;
+&lt;/select&gt;
 &lt;/select&gt;
 &lt;script&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
@@ -146,12 +151,24 @@
                 </div>
             </section>
             <section>
+                <div id="toc4"></div>
                 <h3>Load from TEXT input field</h3>
                 <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;default_input&quot;&gt;&lt;/input&gt;
 &lt;script&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#default_input').asIconPicker(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;[{'value':&nbsp;'fa-caret-right',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Caret-right'},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'value':&nbsp;'fa-star',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Star'},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'value':&nbsp;'fa-heart',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Heart'},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'value':&nbsp;'fa-cloud-upload',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Cloud-upload'},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'value':&nbsp;'fa-phone-square',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Phone-square'},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'value':&nbsp;'fa-bookmark',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Bookmark'}]
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
                 <div class="example">
@@ -159,23 +176,103 @@
                 </div>
             </section>
             <section>
+                <div id="toc5"></div>
                 <h3>Load from TEXT input field (Group)</h3>
                 <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
 &lt;script&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#group_input').asIconPicker(
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;[{'group':&nbsp;&nbsp;&nbsp;true,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label':&nbsp;&nbsp;&nbsp;'Weather',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;[{'label':&nbsp;&nbsp;&nbsp;'Weather',
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']},
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'group':&nbsp;&nbsp;&nbsp;true,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label':&nbsp;&nbsp;&nbsp;'Weather',
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'label':&nbsp;&nbsp;&nbsp;'Weather',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-user',&nbsp;'fa-search',&nbsp;'fa-rocket',&nbsp;'fa-times',&nbsp;'fa-refresh',&nbsp;'fa-adn']
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example" id="api-get-info">
+                <div class="example">
                     <input type="text" name="input" id="group_input"></input>
+                </div>
+            </section>
+        </section>
+        <section>
+            <span id="toc6"></span>
+            <h2>API</h2>
+            <section>
+                <span id="toc7"></span>
+                <h3>Get()</h3>
+                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-star&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-times&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-refresh&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-rocket&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-eye&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-tag&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-bookmark&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-heart&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-adn&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cloud-upload&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-phone-square&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cog&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-wrench&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-volume-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-left&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-thumbs-up&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#getIcon').asIconPicker();
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <select id="getIcon" name="default" class="getIcon">
+                        <option>fa-user</option>
+                        <option>fa-search</option>
+                        <option>fa-caret-right</option>
+                        <option>fa-star</option>
+                        <option>fa-times</option>
+                        <option>fa-refresh</option>
+                        <option>fa-rocket</option>
+                        <option>fa-eye</option>
+                        <option>fa-tag</option>
+                        <option>fa-bookmark</option>
+                        <option>fa-heart</option>
+                        <option>fa-adn</option>
+                        <option>fa-cloud-upload</option>
+                        <option>fa-phone-square</option>
+                        <option>fa-cog</option>
+                        <option>fa-wrench</option>
+                        <option>fa-volume-down</option>
+                        <option>fa-caret-down</option>
+                        <option>fa-caret-up</option>
+                        <option>fa-caret-left</option>
+                        <option>fa-thumbs-up</option>
+                    </select>
                     <button id="api-get-click">getIcon</button>
+                </div>
+                <div class="example" id="api-get-info"></div>
+            </section>
+            <section>
+                <div id="toc8"></div>
+                <h3>Load()</h3>
+                <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#group_input').asIconPicker(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source:&nbsp;[{'label':&nbsp;&nbsp;&nbsp;'Weather',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-caret-right',&nbsp;'fa-star',&nbsp;'fa-heart',&nbsp;'fa-cloud-upload',&nbsp;'fa-phone-square',&nbsp;'fa-bookmark']},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'label':&nbsp;&nbsp;&nbsp;'Weather',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'options':&nbsp;['fa-user',&nbsp;'fa-search',&nbsp;'fa-rocket',&nbsp;'fa-times',&nbsp;'fa-refresh',&nbsp;'fa-adn']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <input type="text" name="input" id="loadFile"></input>
+                    <a id="api-load-click" href="#">Load icon from .json file</a>
                 </div>
             </section>
         </section>
@@ -214,12 +311,24 @@
                           'options': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
                         }]
             });
+            $('#getIcon').asIconPicker();
             $('#api-get-click').click(function() {
-                var html = '<div>' + $('#group_input').asIconPicker('get') + '</div>';
-                console.log($('#group_input').asIconPicker('get'));
+                var html = '<div>Your choice is "' + $('#getIcon').asIconPicker('get') + '"</div>';
                 $(html).prependTo($('#api-get-info'));
                 return false;
             });
+            $('#loadFile').asIconPicker();
+            $('#api-load-click').click(function() {
+                $.ajax({
+                    url:             'json/icon.json',
+                    dataType:        'json'
+                }).done(function(s) {
+                    $('#loadFile').asIconPicker('load', s);
+                });
+
+                // $('#loadFile').asIconPicker('load', source);
+                return false;
+            })
         });
     </script>
 </body>
