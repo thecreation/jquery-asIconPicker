@@ -291,18 +291,12 @@
             $('.default').asIconPicker();
             $('.group').asIconPicker();
             $('#default_input').asIconPicker({
-                source: [{'value': 'fa-caret-right',
-                          'text': 'Caret-right'},
-                         {'value': 'fa-star',
-                          'text': 'Star'},
-                         {'value': 'fa-heart',
-                          'text': 'Heart'},
-                         {'value': 'fa-cloud-upload',
-                          'text': 'Cloud-upload'},
-                         {'value': 'fa-phone-square',
-                          'text': 'Phone-square'},
-                         {'value': 'fa-bookmark',
-                          'text': 'Bookmark'}]
+                source: {'fa-caret-right': 'Caret-right',
+                         'fa-star': 'Star',
+                         'fa-heart': 'Heart',
+                         'fa-cloud-upload': 'Cloud-upload',
+                         'fa-phone-square': 'Phone-square',
+                         'fa-bookmark': 'Bookmark'}
             });
             $('#group_input').asIconPicker({
                 source: [{'label':   'Weather',

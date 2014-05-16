@@ -143,7 +143,7 @@
   position: relative;
   display: inline-block;
   width: 304px;
-  color: #aaa;
+  color: #999;
   font-size: 20px;
   background-color: #fff;
 }
@@ -228,7 +228,7 @@
   left: 0;
   z-index: 1;
   display: block;
-  height: 32px;
+  height: 36px;
   width: 280px;
   width: -webkit-calc(100% - 20px);
   width: calc(100% - 20px);
@@ -254,7 +254,7 @@
 }
 .asIconPicker_with_search .asIconPicker-selector-search > i {
   position: absolute;
-  top: 17px;
+  top: 20px;
   right: 23px;
   color: rgba(0, 0, 0, 0.2);
   font-size: 20px;
@@ -318,10 +318,8 @@
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-list li.asIconPicker_hover {
   color: #6a6f76;
 }
-.asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-error {
+.asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-noMatch {
   display: block;
-  width: 55px;
-  height: 55px;
   margin: 9px;
   line-height: 55px;
   color: #9ea6a9;

@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-05-14
+/*! asIconPicker - v0.1.0 - 2014-05-16
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -14,6 +14,7 @@
             extraClass:       'fa',
             iconPrefix:       'fa-',
             emptyText:        'None Selected',
+            searchText:       'Search',
             cancelSelected:   true,
             keyboard:         true,
 
@@ -32,9 +33,27 @@
             },
             iconSearch: function() {
                 return  '<div class="namespace-selector-search">' +
-                            '<input type="text" name="" value="" placeholder="Search" class="namespace-search-input"/>' +
+                            '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' +
                             '<i class="asIcon-search"></i>' +
                         '</div>';
+            },
+            formatNoMatches: function() {
+                return "No matches found";
+            },
+            errorHanding: function() {},
+            process: function(value) {
+                if (value.match(this.iconPrefix)) {
+                    return value.replace(this.iconPrefix, '');
+                }else {
+                    return value;
+                }
+            },
+            parse: function(value) {
+                if (value.match(this.iconPrefix)) {
+                    return value;
+                }else {
+                    return iconPrefix + value;
+                }
             },
             // callback
             onInit: null,
@@ -65,8 +84,11 @@
         this.$element.wrap('<div class="' + this.classes.wrapper + '"></div>');
         this.$wrapper = this.$element.parent();
 
+        //make $wrapper can be focused
+        this.$wrapper.attr('tabindex', '0');
+
         var iconPicker = this.options.iconPicker().replace(/namespace/g, this.namespace),
-            iconSearch = this.options.iconSearch().replace(/namespace/g, this.namespace);
+            iconSearch = this.options.iconSearch().replace(/namespace/g, this.namespace).replace(/searchText/g, this.options.searchText);
         this.$iconPicker = $(iconPicker);
         this.$iconContainer = this.$iconPicker.find('.' + this.namespace + '-icons-container');
         this.$iconSearch = $(iconSearch);
@@ -81,6 +103,7 @@
         this.map = {};
         this.bound = false;
         this.current = this.$element.val();
+        this.source = [];
 
         // flag
         this.disabled = false;
@@ -98,7 +121,7 @@
                 this.attach(self, this.gather(self));
             },
             destroy: function(self) {
-                self.$iconPicker.off('keydown');
+                self.$wrapper.off('keydown');
                 self.bound = false;
             },
             keys: function() {
@@ -112,6 +135,10 @@
                 };
             },
             horizontalChange: function(step) {
+                if (!this.$mask) {
+                    this._open();
+                    return;
+                }
                 this.index += parseInt(step);
                 if (this.index >= this.iconsAll.length) {
                     this.index = this.iconsAll.length -1;
@@ -122,6 +149,10 @@
                 this.set(this.current);
             },
             verticalChange: function(step) {
+                if (!this.$mask) {
+                    this._open();
+                    return;
+                }
                 var ulHeight = this.$iconContainer.find('.' + this.namespace + '-list').width(),
                     liHeight = this.$iconContainer.find('.' + this.namespace + '-list li').width(),
                     lineNumber = Math.floor(ulHeight / liHeight);
@@ -182,12 +213,21 @@
                 this.set(this.current);
             },
             enter: function() {
-                if (this.current) {
-                    this.set(this.current);
-                    this._hide();
+                if (this.$mask) {
+                    if (this.current) {
+                        this.set(this.current);
+                        this._hide();
+                    }
+                }else {
+                    this._open();
                 }
+                
             },
             esc: function() {
+                this.set(this.previous);
+                this._hide();
+            },
+            tab: function() {
                 this._hide();
             },
             gather: function(self) {
@@ -202,6 +242,11 @@
             },
             press: function(e) {
                 var key = e.keyCode || e.which;
+
+                if (key === 9) {
+                    this._keyboard.tab.call(this);
+                }
+
                 if (key in this.map && typeof this.map[key] === 'function') {
                     e.preventDefault();
                     return this.map[key].call(this);
@@ -239,7 +284,7 @@
                 }
                 if (!self.bound) {
                     self.bound = true;
-                    self.$iconPicker.on('keydown', function(e) {
+                    self.$wrapper.on('keydown', function(e) {
                         _self.press.call(self, e);
                     });
                 }
@@ -255,7 +300,6 @@
 
             // If current element is SELECT populate options.source
             if (!this.options.source && this.$element.is('select')) {
-                this.options.source = [];
                 this.$element.children().each($.proxy(function (i, el) {
                     var item = [];
                     if (el.tagName.toLowerCase() === 'optgroup') {
@@ -269,13 +313,37 @@
                             item.text = $(el).children().eq(j).text();
                             group.options.push(item);
                         }
-                        self.options.source.push(group);
+                        self.source.push(group);
                     }else if ($(el).val()) {
                         item.value = $(el).val();
                         item.text = $(el).text();
-                        this.options.source.push(item);
+                        this.source.push(item);
                     }
                 }, this));
+            }else {
+                for (var key in this.options.source) {
+                    var item = [];
+                    if (this.options.source[key].label) {
+                        var group = [];
+                        group.label = this.options.source[key].label;
+                        group.options = [];
+                        for (var opKey in this.options.source[key].options) {
+                            item = [];
+                            if (parseInt(opKey) >= 0) {
+                                item.value = this.options.source[key].options[opKey];
+                            }else {
+                                item.value = opKey;
+                            }
+                            item.text = this.options.source[key].options[opKey];
+                            group.options.push(item);
+                        }
+                        this.source.push(group);
+                    }else {
+                        item.value = key;
+                        item.text = this.options.source[key];
+                        this.source.push(item);
+                    }
+                }
             }
 
             // Load icons
@@ -287,26 +355,17 @@
              */
             this.$wrapper.find('.' + this.namespace + '-selector').on('click', function () {
                 // Open/Close the icon picker
-                $(this).addClass(self.classes.active);
-                $(this).siblings('.' + self.namespace + '-selector-popup').addClass(self.classes.active).removeClass(self.classes.hide);
-
-                if (self.options.keyboard) {
-                    self._keyboard.init(self);
-                }
-
-                if ($(this).hasClass(self.classes.active)) {
-                    self.$iconPicker.find('.' + self.namespace + '-search-input').focus().select();
-                    self.$mask = $('<div></div>').addClass(self.classes.mask).appendTo(self.$element.parent());
-                    self.$mask.on('click', function() {
-                        self._hide();
-                    });
-                }
+                self._open();
             });
 
             if (!this.options.keyboard) {
                 this.$iconPicker.find('.' + this.namespace + '-search-input').keyup($.proxy(function (e) {
                     self.searching($(e.currentTarget).val());
                 }, this));
+            }else {
+                this.$wrapper.on('focus', function() {
+                    self._keyboard.init(self);
+                });
             }
 
             this.$iconPicker.find('.' + this.namespace + '-selector-search').on('click', '.asIcon-times', $.proxy(function () {
@@ -356,13 +415,14 @@
             this.$iconContainer.html('<span class="' + this.namespace + '-loading"><i></i></span>');
 
             // If source is set
-            if (this.options.source instanceof Array) {
+            if (this.source.length > 0) {
 
                 // Render icons
                 this.fillIcon();
             }
         },
         searching: function(value) {
+            var self = this;
             // If the string is not empty
             if (value === '') {
                 this.reset();
@@ -378,19 +438,19 @@
             this.iconsSearched = [];
 
             // Actual search
-            for (var i = 0, item; item = this.options.source[i]; i++) {
+            for (var i = 0, item; item = this.source[i]; i++) {
                 if (typeof item.label !== 'undefined') {
                     var iconsSearched = [];
                     iconsSearched.label = item.label;
                     iconsSearched.options = $.grep(item.options, function(n){
-                        return (n.value || n).search(value.toLowerCase()) >= 0;
+                        return (self.replaceDiacritics(n.value || n).toLowerCase()).search(value.toLowerCase()) >= 0;
                     });
                     if (iconsSearched.options.length > 0) {
                         this.iconsSearched.push(iconsSearched);
                         this.current = this.iconsSearched[0].options[0].value || this.iconsSearched[0].options[0];
                     }
                 }else {
-                    item.value.search(value.toLowerCase()) >= 0 ? this.iconsSearched.push(item) : 0;
+                    this.replaceDiacritics(item.value).toLowerCase().search(value.toLowerCase()) >= 0 ? this.iconsSearched.push(item) : 0;
                     if (this.iconsSearched.length > 0) {
                         this.current = this.iconsSearched[0].value;
                     }
@@ -414,12 +474,12 @@
             if (this.isSearch) {
                 iconsContainer = this.iconsSearched;
             } else {
-                iconsContainer = this.options.source;
+                iconsContainer = this.source;
             }
 
             // If not show an error when no icons are found
             if (iconsContainer.length < 1) {
-                this.$iconContainer.html('<span class="' + this.namespace + '-error"><i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban"></i></span>');
+                this.$iconContainer.html('<div class="' + this.namespace + '-noMatch">' + this.options.formatNoMatches() + '</div>');
                 return;
 
             // else empty the container
@@ -477,6 +537,20 @@
 
             this._trigger('afterFill');
         },
+        replaceDiacritics: function(s) {
+            // /[\340-\346]/g, // a
+            // /[\350-\353]/g, // e
+            // /[\354-\357]/g, // i
+            // /[\362-\370]/g, // o
+            // /[\371-\374]/g, // u
+            // /[\361]/g, // n
+            // /[\347]/g, // c
+            // /[\377]/g // y
+            var k, d = '40-46 50-53 54-57 62-70 71-74 61 47 77'.replace(/\d+/g, '\\3$&').split(' ');
+            for (k in d)
+                s = s.toLowerCase().replace(RegExp('[' + d[k] + ']', 'g'), 'aeiouncy'.charAt(k));
+            return s;
+        },
         highlight: function(icon) {
             if (icon) {
                 this.$iconPicker.find('.' + icon).parent().addClass(this.classes.hover);
@@ -491,7 +565,10 @@
             }
         },
         shadow: function() {
-            if (this.value > 0.05) {
+            if(typeof this.$iconContainer.data('scroll') ==='undefined'){
+                return;
+            }
+            if (this.value > 0.1) {
                 this.$iconSearch.addClass(this.namespace + '-search-shadow');
             }else {
                 this.$iconSearch.removeClass(this.namespace + '-search-shadow');
@@ -507,7 +584,7 @@
 
         set: function(icon) {
             if (icon) {
-                this.$iconPicker.find('.' + this.namespace + '-selected-icon').removeClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + icon + '"></i>' + icon);
+                this.$iconPicker.find('.' + this.namespace + '-selected-icon').removeClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + icon + '"></i>' + this.options.process(icon));
             }else {
                 this.$iconPicker.find('.' + this.namespace + '-selected-icon').addClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban' + '"></i>' + this.options.emptyText);
             }
@@ -537,6 +614,21 @@
                 this.$iconContainer.asScrollable();
             }
         },
+        _open: function() {
+            var $selector = this.$wrapper.find('.' + this.namespace + '-selector'),
+                self = this;
+            $selector.addClass(this.classes.active);
+            $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.active).removeClass(this.classes.hide);
+            this.previous = this.current;
+
+            if ($selector.hasClass(this.classes.active)) {
+                this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
+                this.$mask = $('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
+                this.$mask.on('click', function() {
+                    self._hide();
+                });
+            }
+        },
         _hide: function() {
             if (this.options.keyboard) {
                 this._keyboard.destroy(this);
@@ -545,6 +637,7 @@
             this._clearMask();
             this.$wrapper.find('.' + this.namespace + '-selector').removeClass(this.classes.active);
             this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide).removeClass(this.classes.active);
+            this.$wrapper.focus();
         },
         _clearMask: function() {
             if (this.$mask) {
@@ -569,7 +662,7 @@
         },
         load: function(source, extraClass) {
             if (typeof source !== 'undefined') {
-                this.options.source = source;
+                this.source = source;
             }
 
             if (extraClass === '') {
@@ -585,7 +678,7 @@
         get: function() {
             var current;
             if (this.current) {
-                current = this.$iconContainer.find('.' + this.current).parent().data('class');
+                current = this.$element.val();
             }else {
                 current = "None select";
             }
