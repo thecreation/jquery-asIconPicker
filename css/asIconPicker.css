@@ -259,6 +259,23 @@
   color: rgba(0, 0, 0, 0.2);
   font-size: 20px;
   cursor: pointer;
+  font-family: 'asFont';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.asIconPicker_with_search .asIconPicker-selector-search > i:before {
+  content: "\e600";
+}
+.asIconPicker_with_search .asIconPicker-selector-search.asIconPicker-isSearching > i:before {
+  content: "\e627";
 }
 .asIconPicker_with_search .asIconPicker-icons-container {
   width: 100%;

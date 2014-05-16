@@ -435,8 +435,7 @@
             }
 
             // Set icon search to X to reset search
-            this.$searchIcon.removeClass('asIcon-search');
-            this.$searchIcon.addClass('asIcon-times');
+            this.$iconSearch.addClass(this.namespace + '-isSearching');
 
             // Set this as a search
             this.isSearch = true;
@@ -607,8 +606,7 @@
             this.$iconPicker.find('.' + this.namespace + '-search-input').val('');
 
             // Reset search icon class
-            this.$searchIcon.removeClass('asIcon-times');
-            this.$searchIcon.addClass('asIcon-search');
+            this.$iconSearch.removeClass(this.namespace + '-isSearching');
             this.isSearch = false;
 
             // Fill icons
