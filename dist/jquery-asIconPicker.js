@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-05-16
+/*! asIconPicker - v0.1.0 - 2014-05-22
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -17,6 +17,8 @@
             searchText:       'Search',
             cancelSelected:   true,
             keyboard:         true,
+            name:             null,
+            flat:             false,
 
             iconPicker: function() {
                 return  '<div class="namespace-selector">' +
@@ -65,6 +67,12 @@
         this.element = element;
         this.$element = $(element);
 
+        if (this.$element.attr('name')) {
+            this.name = this.$element.attr('name');
+        }else {
+            this.name = options.name;
+        }
+        
         this.options = $.extend({}, defaults, options, this.$element.data());
 
         this._plugin = pluginName;
@@ -75,6 +83,7 @@
             wrapper: this.namespace + '-wrapper',
             search: this.namespace + '_with_search',
             active: this.namespace + '_active',
+            flat: this.namespace + '_isFlat',
             hide: this.namespace + '_hide',
             hover: this.namespace + '_hover',
             mask: this.namespace + '-mask'
@@ -135,7 +144,7 @@
                 };
             },
             horizontalChange: function(step) {
-                if (!this.$mask) {
+                if (!this.$mask && !this.options.flat) {
                     this._open();
                     return;
                 }
@@ -149,7 +158,7 @@
                 this.set(this.current);
             },
             verticalChange: function(step) {
-                if (!this.$mask) {
+                if (!this.$mask && !this.options.flat) {
                     this._open();
                     return;
                 }
@@ -353,11 +362,15 @@
             /**
              * On down arrow click
              */
-            this.$wrapper.find('.' + this.namespace + '-selector').on('click', function () {
-                // Open/Close the icon picker
+            if (!self.options.flat) {
+                this.$wrapper.find('.' + this.namespace + '-selector').on('click', function () {
+                    // Open/Close the icon picker
+                    self._open();
+                });
+            }else {
                 self._open();
-            });
-
+            }
+                
             if (!this.options.keyboard) {
                 this.$iconPicker.find('.' + this.namespace + '-search-input').keyup($.proxy(function (e) {
                     self.searching($(e.currentTarget).val());
@@ -615,19 +628,27 @@
         _open: function() {
             var $selector = this.$wrapper.find('.' + this.namespace + '-selector'),
                 self = this;
-            $selector.addClass(this.classes.active);
-            $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.active).removeClass(this.classes.hide);
-            this.previous = this.current;
 
-            if ($selector.hasClass(this.classes.active)) {
-                this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
-                this.$mask = $('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
-                this.$mask.on('click', function() {
-                    self._hide();
-                });
+            if (self.options.flat) {
+                $selector.addClass(this.classes.flat);
+                $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.flat).removeClass(this.classes.hide);
+            }else {
+                $selector.addClass(this.classes.active);
+                $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.active).removeClass(this.classes.hide);
+                this.previous = this.current;
+                if ($selector.hasClass(this.classes.active) && !self.options.flat) {
+                    this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
+                    this.$mask = $('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
+                    this.$mask.on('click', function() {
+                        self._hide();
+                    });
+                }
             }
         },
         _hide: function() {
+            if (this.options.flat) {
+                return;
+            }
             if (this.options.keyboard) {
                 this._keyboard.destroy(this);
             }

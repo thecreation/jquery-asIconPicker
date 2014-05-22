@@ -199,6 +199,63 @@
             <h2>API</h2>
             <section>
                 <span id="toc7"></span>
+                <h3>Flat</h3>
+                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;name=&quot;default&quot;&nbsp;class=&quot;flat&quot;&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-star&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-times&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-refresh&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-rocket&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-eye&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-tag&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-bookmark&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-heart&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-adn&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cloud-upload&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-phone-square&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-cog&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-wrench&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-volume-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-down&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-up&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-left&lt;/option&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-thumbs-up&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.flat').asIconPicker({flat:&nbsp;true});
+&nbsp;&nbsp;&nbsp;&nbsp;});
+&lt;/script&gt;</code></pre>
+                <div class="example">
+                    <select name="default" class="flat">
+                        <option>fa-user</option>
+                        <option>fa-search</option>
+                        <option>fa-caret-right</option>
+                        <option>fa-star</option>
+                        <option>fa-times</option>
+                        <option>fa-refresh</option>
+                        <option>fa-rocket</option>
+                        <option>fa-eye</option>
+                        <option>fa-tag</option>
+                        <option>fa-bookmark</option>
+                        <option>fa-heart</option>
+                        <option>fa-adn</option>
+                        <option>fa-cloud-upload</option>
+                        <option>fa-phone-square</option>
+                        <option>fa-cog</option>
+                        <option>fa-wrench</option>
+                        <option>fa-volume-down</option>
+                        <option>fa-caret-down</option>
+                        <option>fa-caret-up</option>
+                        <option>fa-caret-left</option>
+                        <option>fa-thumbs-up</option>
+                    </select>
+                </div>
+            </section>
+            <section>
+                <span id="toc8"></span>
                 <h3>Get()</h3>
                 <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
@@ -257,7 +314,7 @@
                 <div class="example" id="api-get-info"></div>
             </section>
             <section>
-                <div id="toc8"></div>
+                <div id="toc9"></div>
                 <h3>Load()</h3>
                 <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
 &lt;script&gt;
@@ -305,6 +362,7 @@
                           'options': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
                         }]
             });
+            $('.flat').asIconPicker({flat: true});
             $('#getIcon').asIconPicker();
             $('#api-get-click').click(function() {
                 var html = '<div>Your choice is "' + $('#getIcon').asIconPicker('get') + '"</div>';
