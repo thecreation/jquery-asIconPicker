@@ -690,9 +690,13 @@
                 this.options.extraClass = extraClass;
             }
 
-            this.$wrapper.find('.' + this.namespace + '-selector-popup').removeClass(this.classes.hide);
-            this.showLoading();
-            this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide);
+            if (this.options.flat) {
+                this.showLoading();
+            }else {
+                this.$wrapper.find('.' + this.namespace + '-selector-popup').removeClass(this.classes.hide);
+                this.showLoading();
+                this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide);
+            }
         },
         get: function() {
             var current;
