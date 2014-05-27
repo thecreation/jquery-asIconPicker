@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-05-22
+/*! asIconPicker - v0.1.0 - 2014-05-27
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -667,7 +667,8 @@
         },
         _trigger: function(eventType) {
             // event
-            this.$element.trigger(pluginName + '::' + eventType, this);
+            this.$element.trigger('asIconPicker::' + eventType, this);
+            this.$element.trigger(eventType + '.asIconPicker', this);
 
             // callback
             eventType = eventType.replace(/\b\w+\b/g, function(word) {
