@@ -15,7 +15,6 @@
   text-transform: none;
   line-height: 1;
   /* Better Font Rendering =========== */
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -181,7 +180,6 @@
   text-transform: none;
   line-height: 1;
   /* Better Font Rendering =========== */
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -242,11 +240,6 @@
   padding: 10px;
   background-color: #fff;
 }
-.asIconPicker_with_search .asIconPicker-selector-search.asIconPicker-search-shadow {
-  -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
-  -web-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
-}
 .asIconPicker_with_search .asIconPicker-selector-search .asIconPicker-search-input {
   width: 100%;
   height: 100%;
@@ -274,7 +267,6 @@
   text-transform: none;
   line-height: 1;
   /* Better Font Rendering =========== */
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -291,6 +283,11 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.asIconPicker_with_search .asIconPicker-icons-container.is-scrolled {
+  -webkit-box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08) inset;
+  -web-box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08) inset;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08) inset;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-icons-wrapper {
   max-height: 314px;
@@ -393,7 +390,6 @@
   text-transform: none;
   line-height: 1;
   /* Better Font Rendering =========== */
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-05-27
+/*! asIconPicker - v0.1.0 - 2014-07-04
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -8,36 +8,36 @@
     var pluginName = 'asIconPicker',
         defaults = {
             namespace: 'asIconPicker',
-            source:           false,      // Icons source
-            tooltip:          true,
-            hasSearch:        true,
-            extraClass:       'fa',
-            iconPrefix:       'fa-',
-            emptyText:        'None Selected',
-            searchText:       'Search',
-            cancelSelected:   true,
-            keyboard:         true,
-            name:             null,
-            flat:             false,
+            source: false, // Icons source
+            tooltip: true,
+            hasSearch: true,
+            extraClass: 'fa',
+            iconPrefix: 'fa-',
+            emptyText: 'None Selected',
+            searchText: 'Search',
+            cancelSelected: true,
+            keyboard: true,
+            name: null,
+            flat: false,
 
             iconPicker: function() {
-                return  '<div class="namespace-selector">' +
-                            '<span class="namespace-selected-icon">' +
-                                'None selected' +
-                            '</span>' +
-                            '<span class="namespace-selector-arrow">' +
-                                '<i></i>' +
-                            '</span>' +
-                        '</div>' +
-                        '<div class="namespace-selector-popup">' +
-                            '<div class="namespace-icons-container"></div>' +
-                        '</div>';
+                return '<div class="namespace-selector">' +
+                    '<span class="namespace-selected-icon">' +
+                    'None selected' +
+                    '</span>' +
+                    '<span class="namespace-selector-arrow">' +
+                    '<i></i>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="namespace-selector-popup">' +
+                    '<div class="namespace-icons-container"></div>' +
+                    '</div>';
             },
             iconSearch: function() {
-                return  '<div class="namespace-selector-search">' +
-                            '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' +
-                            '<i class="asIcon-search"></i>' +
-                        '</div>';
+                return '<div class="namespace-selector-search">' +
+                    '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' +
+                    '<i class="asIcon-search"></i>' +
+                    '</div>';
             },
             formatNoMatches: function() {
                 return "No matches found";
@@ -46,14 +46,14 @@
             process: function(value) {
                 if (value.match(this.iconPrefix)) {
                     return value.replace(this.iconPrefix, '');
-                }else {
+                } else {
                     return value;
                 }
             },
             parse: function(value) {
                 if (value.match(this.iconPrefix)) {
                     return value;
-                }else {
+                } else {
                     return iconPrefix + value;
                 }
             },
@@ -67,12 +67,6 @@
         this.element = element;
         this.$element = $(element);
 
-        if (this.$element.attr('name')) {
-            this.name = this.$element.attr('name');
-        }else {
-            this.name = options.name;
-        }
-        
         this.options = $.extend({}, defaults, options, this.$element.data());
 
         this._plugin = pluginName;
@@ -150,8 +144,8 @@
                 }
                 this.index += parseInt(step);
                 if (this.index >= this.iconsAll.length) {
-                    this.index = this.iconsAll.length -1;
-                }else if (this.index < 0) {
+                    this.index = this.iconsAll.length - 1;
+                } else if (this.index < 0) {
                     this.index = 0;
                 }
                 this.current = this.iconsAll[this.index];
@@ -178,20 +172,20 @@
                             if (index + remain >= siblingNumber && remain > 0) {
                                 if (index + remain >= siblingNumber + nextNumber) {
                                     this.index += nextNumber;
-                                }else {
+                                } else {
                                     this.index += remain;
                                 }
-                            }else {
+                            } else {
                                 if (index + remain + lineNumber >= siblingNumber + nextNumber) {
                                     this.index += remain + nextNumber;
-                                }else {
+                                } else {
                                     this.index += remain + lineNumber;
                                 }
                             }
-                        }else {
+                        } else {
                             this.index += lineNumber;
                         }
-                    }else if (step === -1) {
+                    } else if (step === -1) {
                         var siblingNumber = this.$iconContainer.find('.' + this.current).parent().siblings().length + 1,
                             prevNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').prev().find('li').length,
                             index = this.$iconContainer.find('.' + this.current).parent().index(),
@@ -200,12 +194,12 @@
                         if (index > remain - 1 && index < lineNumber) {
                             if (prevNumber >= lineNumber) {
                                 this.index -= lineNumber + remain;
-                            }else {
+                            } else {
                                 this.index -= index + 1;
                             }
-                        }else if (index <= remain - 1){
+                        } else if (index <= remain - 1) {
                             this.index -= remain;
-                        }else {
+                        } else {
                             this.index -= lineNumber;
                         }
                     }
@@ -215,7 +209,7 @@
 
                 if (this.index >= this.iconsAll.length) {
                     this.index = this.iconsAll.length - 1;
-                }else if (this.index < 0) {
+                } else if (this.index < 0) {
                     this.index = 0;
                 }
                 this.current = this.iconsAll[this.index];
@@ -227,10 +221,10 @@
                         this.set(this.current);
                         this._hide();
                     }
-                }else {
+                } else {
                     this._open();
                 }
-                
+
             },
             esc: function() {
                 this.set(this.previous);
@@ -309,7 +303,7 @@
 
             // If current element is SELECT populate options.source
             if (!this.options.source && this.$element.is('select')) {
-                this.$element.children().each($.proxy(function (i, el) {
+                this.$element.children().each($.proxy(function(i, el) {
                     var item = [];
                     if (el.tagName.toLowerCase() === 'optgroup') {
                         var group = $.extend({}, $(el).data(), {
@@ -323,13 +317,13 @@
                             group.options.push(item);
                         }
                         self.source.push(group);
-                    }else if ($(el).val()) {
+                    } else if ($(el).val()) {
                         item.value = $(el).val();
                         item.text = $(el).text();
                         this.source.push(item);
                     }
                 }, this));
-            }else {
+            } else {
                 for (var key in this.options.source) {
                     var item = [];
                     if (this.options.source[key].label) {
@@ -340,14 +334,14 @@
                             item = [];
                             if (parseInt(opKey) >= 0) {
                                 item.value = this.options.source[key].options[opKey];
-                            }else {
+                            } else {
                                 item.value = opKey;
                             }
                             item.text = this.options.source[key].options[opKey];
                             group.options.push(item);
                         }
                         this.source.push(group);
-                    }else {
+                    } else {
                         item.value = key;
                         item.text = this.options.source[key];
                         this.source.push(item);
@@ -363,25 +357,25 @@
              * On down arrow click
              */
             if (!self.options.flat) {
-                this.$wrapper.find('.' + this.namespace + '-selector').on('click', function () {
+                this.$wrapper.find('.' + this.namespace + '-selector').on('click', function() {
                     // Open/Close the icon picker
                     self._open();
                 });
-            }else {
+            } else {
                 self._open();
             }
-                
+
             if (!this.options.keyboard) {
-                this.$iconPicker.find('.' + this.namespace + '-search-input').keyup($.proxy(function (e) {
+                this.$iconPicker.find('.' + this.namespace + '-search-input').keyup($.proxy(function(e) {
                     self.searching($(e.currentTarget).val());
                 }, this));
-            }else {
+            } else {
                 this.$wrapper.on('focus', function() {
                     self._keyboard.init(self);
                 });
             }
 
-            this.$iconPicker.find('.' + this.namespace + '-selector-search').on('click', '.asIcon-times', $.proxy(function () {
+            this.$iconPicker.find('.' + this.namespace + '-selector-search').on('click', '.asIcon-times', $.proxy(function() {
                 this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
                 this.reset();
             }, this));
@@ -394,11 +388,11 @@
                 }
                 this.set($(e.currentTarget).data('class'));
                 this._hide();
-            },this)).on('mouseenter', '.' + this.namespace + '-list li', $.proxy(function(e) {
+            }, this)).on('mouseenter', '.' + this.namespace + '-list li', $.proxy(function(e) {
                 this.highlight($(e.currentTarget).data('class'));
-            },this)).on('mouseleave', '.' + this.namespace + '-list li', $.proxy(function(e) {
+            }, this)).on('mouseleave', '.' + this.namespace + '-list li', $.proxy(function(e) {
                 this.highlight();
-            },this));
+            }, this));
 
             this.$iconContainer.on('change.asScrollable', function(e, val) {
                 self.value = val;
@@ -408,7 +402,7 @@
             /**
              * Stop click propagation on iconpicker
              */
-            this.$iconPicker.click(function (event) {
+            this.$iconPicker.click(function(event) {
                 event.stopPropagation();
                 self.$iconPicker.find('.' + self.namespace + '-search-input').focus().select();
                 return false;
@@ -454,14 +448,14 @@
                 if (typeof item.label !== 'undefined') {
                     var iconsSearched = [];
                     iconsSearched.label = item.label;
-                    iconsSearched.options = $.grep(item.options, function(n){
+                    iconsSearched.options = $.grep(item.options, function(n) {
                         return (self.replaceDiacritics(n.value || n).toLowerCase()).search(value.toLowerCase()) >= 0;
                     });
                     if (iconsSearched.options.length > 0) {
                         this.iconsSearched.push(iconsSearched);
                         this.current = this.iconsSearched[0].options[0].value || this.iconsSearched[0].options[0];
                     }
-                }else {
+                } else {
                     this.replaceDiacritics(item.value).toLowerCase().search(value.toLowerCase()) >= 0 ? this.iconsSearched.push(item) : 0;
                     if (this.iconsSearched.length > 0) {
                         this.current = this.iconsSearched[0].value;
@@ -476,9 +470,9 @@
          * Fill icons inside the popup
          */
         fillIcon: function() {
-            if(typeof this.$iconContainer.data('scroll') !=='undefined'){
+            if (typeof this.$iconContainer.data('scroll') !== 'undefined') {
                 this.$iconContainer.asScrollable('destory');
-            } 
+            }
             var iconsContainer = [];
             this.iconsAll = [];
 
@@ -494,7 +488,7 @@
                 this.$iconContainer.html('<div class="' + this.namespace + '-noMatch">' + this.options.formatNoMatches() + '</div>');
                 return;
 
-            // else empty the container
+                // else empty the container
             } else {
                 this.$iconContainer.html('');
             }
@@ -507,8 +501,8 @@
                     }
                     for (var j = 0, option; option = item.options[j]; j++) {
                         $('<li/>', {
-                            html:      '<i class="' + this.options.extraClass + ' ' + (option.value || option)+ '"></i>',
-                            'title':   (this.options.tooltip) ? (option.text || option) : ''
+                            html: '<i class="' + this.options.extraClass + ' ' + (option.value || option) + '"></i>',
+                            'title': (this.options.tooltip) ? (option.text || option) : ''
                         }).data('class', (option.value || option)).appendTo($group.find('ul'));
                         this.iconsAll.push(option.value || option);
                     }
@@ -518,8 +512,8 @@
                         $('<ul class="' + this.namespace + '-list"></ul>').appendTo(this.$iconContainer);
                     }
                     $('<li/>', {
-                        html:      '<i class="' + this.options.extraClass + ' '  + (item.value || item) + '"></i>',
-                        'title':   (this.options.tooltip) ? (item.text || item) : ''
+                        html: '<i class="' + this.options.extraClass + ' ' + (item.value || item) + '"></i>',
+                        'title': (this.options.tooltip) ? (item.text || item) : ''
                     }).data('class', (item.value || item)).appendTo(this.$iconContainer.children().last());
                     this.iconsAll.push(item.value || item);
                 }
@@ -566,23 +560,23 @@
         highlight: function(icon) {
             if (icon) {
                 this.$iconPicker.find('.' + icon).parent().addClass(this.classes.hover);
-            }else {
+            } else {
                 this.$iconPicker.find('.' + this.classes.hover).removeClass(this.classes.hover);
             }
         },
-        select: function () {
+        select: function() {
             this.$iconContainer.find('.' + this.namespace + '-current').removeClass(this.namespace + '-current');
             if (this.current) {
                 this.$iconContainer.find('.' + this.current).parent('li').addClass(this.namespace + '-current');
             }
         },
         shadow: function() {
-            if(typeof this.$iconContainer.data('scroll') ==='undefined'){
+            if (typeof this.$iconContainer.data('scroll') === 'undefined') {
                 return;
             }
             if (this.value > 0.1) {
                 this.$iconSearch.addClass(this.namespace + '-search-shadow');
-            }else {
+            } else {
                 this.$iconSearch.removeClass(this.namespace + '-search-shadow');
             }
         },
@@ -592,21 +586,6 @@
             }
             this.$iconContainer.asScrollable('move', this.value, true);
             this.shadow();
-        },
-
-        set: function(icon) {
-            if (icon) {
-                this.$iconPicker.find('.' + this.namespace + '-selected-icon').removeClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + icon + '"></i>' + this.options.process(icon));
-            }else {
-                this.$iconPicker.find('.' + this.namespace + '-selected-icon').addClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban' + '"></i>' + this.options.emptyText);
-            }
-
-            // Set the value of the element and trigger change event
-            this.$element.val(icon).triggerHandler('change');
-            this.current = icon;
-            this.index = $.inArray(this.current, this.iconsAll);
-            this.scrollbar();
-            this.select();
         },
 
         reset: function() {
@@ -632,7 +611,7 @@
             if (self.options.flat) {
                 $selector.addClass(this.classes.flat);
                 $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.flat).removeClass(this.classes.hide);
-            }else {
+            } else {
                 $selector.addClass(this.classes.active);
                 $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.active).removeClass(this.classes.hide);
                 this.previous = this.current;
@@ -687,13 +666,13 @@
 
             if (extraClass === '') {
                 this.options.extraClass = '';
-            }else if (typeof extraClass !== 'undefined') {
+            } else if (typeof extraClass !== 'undefined') {
                 this.options.extraClass = extraClass;
             }
 
             if (this.options.flat) {
                 this.showLoading();
-            }else {
+            } else {
                 this.$wrapper.find('.' + this.namespace + '-selector-popup').removeClass(this.classes.hide);
                 this.showLoading();
                 this.$wrapper.find('.' + this.namespace + '-selector-popup').addClass(this.classes.hide);
@@ -703,16 +682,39 @@
             var current;
             if (this.current) {
                 current = this.$element.val();
-            }else {
+            } else {
                 current = "None select";
             }
             return current;
         },
-        val: function(value) {
-            if (value) {
-                this.set(value);
+        set: function(icon) {
+            if (icon) {
+                this.$iconPicker.find('.' + this.namespace + '-selected-icon').removeClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + icon + '"></i>' + this.options.process(icon));
             } else {
-                return this.get();
+                this.$iconPicker.find('.' + this.namespace + '-selected-icon').addClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban' + '"></i>' + this.options.emptyText);
+            }
+
+            // Set the value of the element and trigger change event
+            this.$element.val(icon).triggerHandler('change');
+            this.current = icon;
+            this.index = $.inArray(this.current, this.iconsAll);
+            this.scrollbar();
+            this.select();
+        },
+        clear: function() {
+            this.set(null);
+        },
+        val: function(value) {
+            if (typeof value === 'undefined') {
+                return this.options.process(this.value);
+            }
+
+            var value_obj = this.options.parse(value);
+
+            if (value_obj) {
+                this.set(value_obj);
+            } else {
+                this.clear();
             }
         },
         enable: function() {
@@ -728,8 +730,6 @@
             // which element is up to your requirement
             // .disabled { pointer-events: none; } NO SUPPORT IE11 BELOW
             this.$wrapper.addClass(this.classes.disabled);
-
-            // here maybe have some events attached
         },
         destory: function() {
             // detached events first

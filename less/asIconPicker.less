@@ -113,12 +113,6 @@
 		width:         ~"calc(100% - 20px)";
 		padding: 10px;
 		background-color: #fff;
-		
-		&.asIconPicker-search-shadow {
-			-webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.08);
-			   -web-box-shadow: 0 0 4px 0 rgba(0,0,0,0.08);
-			   	    box-shadow: 0 0 4px 0 rgba(0,0,0,0.08);
-		}
 
 		.asIconPicker-search-input {
 			width: 100%;
@@ -169,6 +163,11 @@
 		margin-top: 55px;
 		overflow: auto;
 
+		&.is-scrolled {
+			-webkit-box-shadow: 0 4px 0 rgba(0,0,0,0.08) inset;
+			   -web-box-shadow: 0 4px 0 rgba(0,0,0,0.08) inset;
+			   	    box-shadow: 0 4px 0 rgba(0,0,0,0.08) inset;
+		}
 
 		-webkit-box-sizing: border-box;
 		   -moz-box-sizing: border-box;
