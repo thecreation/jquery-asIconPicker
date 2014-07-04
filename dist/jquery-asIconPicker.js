@@ -394,7 +394,7 @@
                 this.highlight();
             }, this));
 
-            this.$iconContainer.on('change.asScrollable', function(e, val) {
+            this.$iconContainer.on('change.asScrollbar', function(e, val) {
                 self.value = val;
                 self.shadow();
             });
@@ -471,7 +471,7 @@
          */
         fillIcon: function() {
             if (typeof this.$iconContainer.data('scroll') !== 'undefined') {
-                this.$iconContainer.asScrollable('destory');
+                this.$iconContainer.asScrollbar('destory');
             }
             var iconsContainer = [];
             this.iconsAll = [];
@@ -536,7 +536,7 @@
 
             // Add the scrollbar in the iconContainer
             var self = this;
-            this.$iconContainer.asScrollable({
+            this.$iconContainer.asScrollbar({
                 contentClass: self.namespace + '-icons-content',
                 wrapperClass: self.namespace + '-icons-wrapper'
             });
@@ -584,7 +584,7 @@
             if (this.current) {
                 this.value = (this.index > 0 ? this.index : 1) / this.iconsAll.length;
             }
-            this.$iconContainer.asScrollable('move', this.value, true);
+            this.$iconContainer.asScrollbar('move', this.value, true);
             this.shadow();
         },
 
@@ -601,7 +601,7 @@
 
             // Add the scrollbar in the iconContainer
             if (this.$iconContainer.outerHeight() >= 290) {
-                this.$iconContainer.asScrollable();
+                this.$iconContainer.asScrollbar();
             }
         },
         _open: function() {

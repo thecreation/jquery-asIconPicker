@@ -2,7 +2,7 @@
  * jquery-asIconPicker
  * https://github.com/amazingSurge/jquery-asIconPicker
  *
- * Copyright (c) 2013 joeylin
+ * Copyright (c) 2014 amazingSurge
  * Licensed under the MIT license.
  */
 
@@ -401,7 +401,6 @@
 
             this.$iconContainer.on('change.asScrollbar', function(e, val) {
                 self.value = val;
-                self.shadow();
             });
 
             /**
@@ -533,6 +532,7 @@
             }
 
             this.index = $.inArray(this.current, this.iconsAll);
+            console.info(this.iconsAll);
             if (this.index >= 0) {
                 this.set(this.current);
             } else {
@@ -575,22 +575,11 @@
                 this.$iconContainer.find('.' + this.current).parent('li').addClass(this.namespace + '-current');
             }
         },
-        shadow: function() {
-            if (typeof this.$iconContainer.data('scroll') === 'undefined') {
-                return;
-            }
-            if (this.value > 0.1) {
-                this.$iconSearch.addClass(this.namespace + '-search-shadow');
-            } else {
-                this.$iconSearch.removeClass(this.namespace + '-search-shadow');
-            }
-        },
         scrollbar: function() {
             if (this.current) {
                 this.value = (this.index > 0 ? this.index : 1) / this.iconsAll.length;
             }
             this.$iconContainer.asScrollbar('move', this.value, true);
-            this.shadow();
         },
 
         reset: function() {
