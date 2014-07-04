@@ -285,9 +285,9 @@
   box-sizing: border-box;
 }
 .asIconPicker_with_search .asIconPicker-icons-container.is-scrolled {
-  -webkit-box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08) inset;
-  -web-box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08) inset;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08) inset;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) inset;
+  -web-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) inset;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-icons-wrapper {
   max-height: 314px;
