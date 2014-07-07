@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-07-04
+/*! asIconPicker - v0.1.0 - 2014-07-08
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -304,14 +304,14 @@
             // If current element is SELECT populate options.source
             if (!this.options.source && this.$element.is('select')) {
                 this.$element.children().each($.proxy(function(i, el) {
-                    var item = [];
+                    var item = {};
                     if (el.tagName.toLowerCase() === 'optgroup') {
                         var group = $.extend({}, $(el).data(), {
                             'label': el.label,
                             'options': []
                         });
                         for (var j = 0; j < $(el).children().length; j++) {
-                            item = [];
+                            item = {};
                             item.value = $(el).children().eq(j).val();
                             item.text = $(el).children().eq(j).text();
                             group.options.push(item);
@@ -325,7 +325,7 @@
                 }, this));
             } else {
                 for (var key in this.options.source) {
-                    var item = [];
+                    var item = {};
                     if (this.options.source[key].label) {
                         var group = [];
                         group.label = this.options.source[key].label;
@@ -348,7 +348,6 @@
                     }
                 }
             }
-
             // Load icons
             this.showLoading();
 
@@ -396,7 +395,6 @@
 
             this.$iconContainer.on('change.asScrollbar', function(e, val) {
                 self.value = val;
-                self.shadow();
             });
 
             /**
@@ -570,22 +568,11 @@
                 this.$iconContainer.find('.' + this.current).parent('li').addClass(this.namespace + '-current');
             }
         },
-        shadow: function() {
-            if (typeof this.$iconContainer.data('scroll') === 'undefined') {
-                return;
-            }
-            if (this.value > 0.1) {
-                this.$iconSearch.addClass(this.namespace + '-search-shadow');
-            } else {
-                this.$iconSearch.removeClass(this.namespace + '-search-shadow');
-            }
-        },
         scrollbar: function() {
             if (this.current) {
                 this.value = (this.index > 0 ? this.index : 1) / this.iconsAll.length;
             }
             this.$iconContainer.asScrollbar('move', this.value, true);
-            this.shadow();
         },
 
         reset: function() {
