@@ -124,180 +124,6 @@
     Plugin.prototype = {
         constructor: Plugin,
 
-        _keyboard: {
-            init: function(self) {
-                this.attach(self, this.gather(self));
-            },
-            destroy: function(self) {
-                self.$wrapper.off('keydown');
-                self.bound = false;
-            },
-            keys: function() {
-                return {
-                    'LEFT': 37,
-                    'UP': 38,
-                    'RIGHT': 39,
-                    'DOWN': 40,
-                    'ENTER': 13,
-                    'ESC': 27,
-                };
-            },
-            horizontalChange: function(step) {
-                if (!this.$mask && !this.options.flat) {
-                    this._open();
-                    return;
-                }
-                this.index += parseInt(step);
-                if (this.index >= this.iconsAll.length) {
-                    this.index = this.iconsAll.length - 1;
-                } else if (this.index < 0) {
-                    this.index = 0;
-                }
-                this.current = this.iconsAll[this.index];
-                this.set(this.current);
-            },
-            verticalChange: function(step) {
-                if (!this.$mask && !this.options.flat) {
-                    this._open();
-                    return;
-                }
-                var ulHeight = this.$iconContainer.find('.' + this.namespace + '-list').width(),
-                    liHeight = this.$iconContainer.find('.' + this.namespace + '-list li').width(),
-                    lineNumber = Math.floor(ulHeight / liHeight);
-                step = parseInt(step);
-
-                if (this.index >= 0 && this.$iconContainer.find('.' + this.namespace + '-group').text()) {
-                    if (step === 1) {
-                        var siblingNumber = this.$iconContainer.find('.' + this.current).parent().siblings().length + 1,
-                            nextNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').next().find('li').length,
-                            index = this.$iconContainer.find('.' + this.current).parent().index(),
-                            remain = siblingNumber % lineNumber;
-
-                        if (index + lineNumber >= siblingNumber && nextNumber) {
-                            if (index + remain >= siblingNumber && remain > 0) {
-                                if (index + remain >= siblingNumber + nextNumber) {
-                                    this.index += nextNumber;
-                                } else {
-                                    this.index += remain;
-                                }
-                            } else {
-                                if (index + remain + lineNumber >= siblingNumber + nextNumber) {
-                                    this.index += remain + nextNumber;
-                                } else {
-                                    this.index += remain + lineNumber;
-                                }
-                            }
-                        } else {
-                            this.index += lineNumber;
-                        }
-                    } else if (step === -1) {
-                        var siblingNumber = this.$iconContainer.find('.' + this.current).parent().siblings().length + 1,
-                            prevNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').prev().find('li').length,
-                            index = this.$iconContainer.find('.' + this.current).parent().index(),
-                            remain = prevNumber % lineNumber;
-
-                        if (index > remain - 1 && index < lineNumber) {
-                            if (prevNumber >= lineNumber) {
-                                this.index -= lineNumber + remain;
-                            } else {
-                                this.index -= index + 1;
-                            }
-                        } else if (index <= remain - 1) {
-                            this.index -= remain;
-                        } else {
-                            this.index -= lineNumber;
-                        }
-                    }
-                } else {
-                    this.index += lineNumber * step;
-                }
-
-                if (this.index >= this.iconsAll.length) {
-                    this.index = this.iconsAll.length - 1;
-                } else if (this.index < 0) {
-                    this.index = 0;
-                }
-                this.current = this.iconsAll[this.index];
-                this.set(this.current);
-            },
-            enter: function() {
-                if (this.$mask) {
-                    if (this.current) {
-                        this.set(this.current);
-                        this._hide();
-                    }
-                } else {
-                    this._open();
-                }
-
-            },
-            esc: function() {
-                this.set(this.previous);
-                this._hide();
-            },
-            tab: function() {
-                this._hide();
-            },
-            gather: function(self) {
-                return {
-                    left: $.proxy(this.horizontalChange, self, '-1'),
-                    up: $.proxy(this.verticalChange, self, '-1'),
-                    right: $.proxy(this.horizontalChange, self, '1'),
-                    down: $.proxy(this.verticalChange, self, '1'),
-                    enter: $.proxy(this.enter, self),
-                    esc: $.proxy(this.esc, self)
-                };
-            },
-            press: function(e) {
-                var key = e.keyCode || e.which;
-
-                if (key === 9) {
-                    this._keyboard.tab.call(this);
-                }
-
-                if (key in this.map && typeof this.map[key] === 'function') {
-                    e.preventDefault();
-                    return this.map[key].call(this);
-                } else {
-                    var self = this;
-                    this.$iconPicker.find('.' + this.namespace + '-search-input').one('keyup', function() {
-                        self.searching($(this).val());
-                    });
-                }
-            },
-            attach: function(self, map) {
-                var key, _self = this;
-                for (key in map) {
-                    if (map.hasOwnProperty(key)) {
-                        var uppercase = [],
-                            parts = self._stringSeparate(key, '_'),
-                            len = parts.length;
-
-                        if (len === 1) {
-                            uppercase[0] = parts[0].toUpperCase();
-                            self.map[this.keys()[uppercase[0]]] = map[key];
-                        } else {
-                            for (var i = 0; i < parts.length; i++) {
-                                uppercase[i] = parts[i].toUpperCase();
-                                if (i === 0) {
-                                    if (self.map[this.keys()[uppercase[0]]] === undefined) {
-                                        self.map[this.keys()[uppercase[0]]] = {};
-                                    }
-                                } else {
-                                    self.map[this.keys()[uppercase[0]]][this.keys()[uppercase[i]]] = map[key];
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!self.bound) {
-                    self.bound = true;
-                    self.$wrapper.on('keydown', function(e) {
-                        _self.press.call(self, e);
-                    });
-                }
-            }
-        },
         init: function() {
             var self = this;
             // Hide source element
@@ -306,54 +132,11 @@
             // Add the icon picker after the select
             this.$element.before(this.$iconPicker);
 
-            // If current element is SELECT populate options.source
             if (!this.options.source && this.$element.is('select')) {
-                this.$element.children().each($.proxy(function(i, el) {
-                    var item = [];
-                    if (el.tagName.toLowerCase() === 'optgroup') {
-                        var group = $.extend({}, $(el).data(), {
-                            'label': el.label,
-                            'options': []
-                        });
-                        for (var j = 0; j < $(el).children().length; j++) {
-                            item = [];
-                            item.value = $(el).children().eq(j).val();
-                            item.text = $(el).children().eq(j).text();
-                            group.options.push(item);
-                        }
-                        self.source.push(group);
-                    } else if ($(el).val()) {
-                        item.value = $(el).val();
-                        item.text = $(el).text();
-                        this.source.push(item);
-                    }
-                }, this));
+                this.source = this._getSourceFromSelect();
             } else {
-                for (var key in this.options.source) {
-                    var item = [];
-                    if (this.options.source[key].label) {
-                        var group = [];
-                        group.label = this.options.source[key].label;
-                        group.options = [];
-                        for (var opKey in this.options.source[key].options) {
-                            item = [];
-                            if (parseInt(opKey) >= 0) {
-                                item.value = this.options.source[key].options[opKey];
-                            } else {
-                                item.value = opKey;
-                            }
-                            item.text = this.options.source[key].options[opKey];
-                            group.options.push(item);
-                        }
-                        this.source.push(group);
-                    } else {
-                        item.value = key;
-                        item.text = this.options.source[key];
-                        this.source.push(item);
-                    }
-                }
+                this.source = this._processSource(this.options.source);
             }
-
             // Load icons
             this.showLoading();
 
@@ -416,12 +199,69 @@
             // after init end trigger 'ready'
             this._trigger('ready');
         },
+
+        _getSourceFromSelect: function() {
+            var self = this;
+            var source = [];
+            this.$element.children().each(function(i, el) {
+                var item = {}, $el = $(el);
+                if ($el.is('optgroup')) {
+                    var group = $.extend({}, $el.data(), {
+                        'label': el.label,
+                        'items': []
+                    });
+                    var $children = $el.children();
+                    var length = $children.length;
+                    for (var j = 0; j < length; j++) {
+                        group.items.push({
+                            value: $children.eq(j).val(),
+                            text: $children.eq(j).text()
+                        });
+                    }
+                    source.push(group);
+                } else if ($el.is('option')) {
+                    source.push({
+                        value: $el.val(),
+                        text: $el.text()
+                    });
+                }
+            });
+
+            return source;
+        },
+
+        _processSource: function(source) {
+            var processItem = function(item){
+                if(typeof item === 'string'){
+                    return {
+                        value: item,
+                        text: item
+                    };
+                }
+
+                return item;
+            }
+
+            for (var key in source) {
+                if (source[key].items) {
+                    for (var i in source[key].items) {
+                       source[key].items[i] = processItem(source[key].items[i]);
+                    }
+                } else {
+                    source[key] = processItem(source[key]);
+                }
+            }
+
+            return source;
+        },
+
         _stringSeparate: function(str, separator) {
             var re = new RegExp("[.\\" + separator + "\\s].*?"),
                 separator = str.match(re),
                 parts = str.split(separator);
             return parts;
         },
+
         showLoading: function() {
             this.$iconContainer.html('<span class="' + this.namespace + '-loading"><i></i></span>');
 
@@ -452,12 +292,12 @@
                 if (typeof item.label !== 'undefined') {
                     var iconsSearched = [];
                     iconsSearched.label = item.label;
-                    iconsSearched.options = $.grep(item.options, function(n) {
+                    iconsSearched.items = $.grep(item.items, function(n) {
                         return (self.replaceDiacritics(n.value || n).toLowerCase()).search(value.toLowerCase()) >= 0;
                     });
-                    if (iconsSearched.options.length > 0) {
+                    if (iconsSearched.items.length > 0) {
                         this.iconsSearched.push(iconsSearched);
-                        this.current = this.iconsSearched[0].options[0].value || this.iconsSearched[0].options[0];
+                        this.current = this.iconsSearched[0].items[0].value;
                     }
                 } else {
                     this.replaceDiacritics(item.value).toLowerCase().search(value.toLowerCase()) >= 0 ? this.iconsSearched.push(item) : 0;
@@ -477,18 +317,18 @@
             if (typeof this.$iconContainer.data('scroll') !== 'undefined') {
                 this.$iconContainer.asScrollbar('destory');
             }
-            var iconsContainer = [];
+            var tempIcons = [];
             this.iconsAll = [];
 
             // Set a temporary array for icons
             if (this.isSearch) {
-                iconsContainer = this.iconsSearched;
+                tempIcons = this.iconsSearched;
             } else {
-                iconsContainer = this.source;
+                tempIcons = this.source;
             }
 
             // If not show an error when no icons are found
-            if (iconsContainer.length < 1) {
+            if (tempIcons.length < 1) {
                 this.$iconContainer.html('<div class="' + this.namespace + '-noMatch">' + this.options.formatNoMatches() + '</div>');
                 return;
 
@@ -498,12 +338,12 @@
             }
 
             // List icons
-            for (var i = 0, item; item = iconsContainer[i]; i++) {
+            for (var i = 0, item; item = tempIcons[i]; i++) {
                 if (typeof item.label !== 'undefined') {
-                    if (item.options.length) {
+                    if (item.items.length) {
                         var $group = $('<div class="' + this.namespace + '-group"><div class="' + this.namespace + '-group-label">' + item.label + ':</div><ul class="' + this.namespace + '-list"></ul></div>').appendTo(this.$iconContainer);
                     }
-                    for (var j = 0, option; option = item.options[j]; j++) {
+                    for (var j = 0, option; option = item.items[j]; j++) {
                         $('<li/>', {
                             html: '<i class="' + this.options.extraClass + ' ' + (option.value || option) + '"></i>',
                             'title': (this.options.tooltip) ? (option.text || option) : ''
@@ -532,7 +372,7 @@
             }
 
             this.index = $.inArray(this.current, this.iconsAll);
-            console.info(this.iconsAll);
+
             if (this.index >= 0) {
                 this.set(this.current);
             } else {
@@ -653,15 +493,182 @@
                 this.options[onFunction].apply(this, method_arguments);
             }
         },
-        load: function(source, extraClass) {
-            if (typeof source !== 'undefined') {
-                this.source = source;
-            }
+        _keyboard: {
+            init: function(self) {
+                this.attach(self, this.gather(self));
+            },
+            destroy: function(self) {
+                self.$wrapper.off('keydown');
+                self.bound = false;
+            },
+            keys: function() {
+                return {
+                    'LEFT': 37,
+                    'UP': 38,
+                    'RIGHT': 39,
+                    'DOWN': 40,
+                    'ENTER': 13,
+                    'ESC': 27
+                };
+            },
+            horizontalChange: function(step) {
+                if (!this.$mask && !this.options.flat) {
+                    this._open();
+                    return;
+                }
+                this.index += parseInt(step, 10);
+                if (this.index >= this.iconsAll.length) {
+                    this.index = this.iconsAll.length - 1;
+                } else if (this.index < 0) {
+                    this.index = 0;
+                }
+                this.current = this.iconsAll[this.index];
+                this.set(this.current);
+            },
+            verticalChange: function(step) {
+                if (!this.$mask && !this.options.flat) {
+                    this._open();
+                    return;
+                }
+                var ulHeight = this.$iconContainer.find('.' + this.namespace + '-list').width(),
+                    liHeight = this.$iconContainer.find('.' + this.namespace + '-list li').width(),
+                    lineNumber = Math.floor(ulHeight / liHeight);
+                    step = parseInt(step, 10);
 
-            if (extraClass === '') {
-                this.options.extraClass = '';
-            } else if (typeof extraClass !== 'undefined') {
-                this.options.extraClass = extraClass;
+                if (this.index >= 0 && this.$iconContainer.find('.' + this.namespace + '-group').text()) {
+                    if (step === 1) {
+                        var siblingNumber = this.$iconContainer.find('.' + this.current).parent().siblings().length + 1,
+                            nextNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').next().find('li').length,
+                            index = this.$iconContainer.find('.' + this.current).parent().index(),
+                            remain = siblingNumber % lineNumber;
+
+                        if (index + lineNumber >= siblingNumber && nextNumber) {
+                            if (index + remain >= siblingNumber && remain > 0) {
+                                if (index + remain >= siblingNumber + nextNumber) {
+                                    this.index += nextNumber;
+                                } else {
+                                    this.index += remain;
+                                }
+                            } else {
+                                if (index + remain + lineNumber >= siblingNumber + nextNumber) {
+                                    this.index += remain + nextNumber;
+                                } else {
+                                    this.index += remain + lineNumber;
+                                }
+                            }
+                        } else {
+                            this.index += lineNumber;
+                        }
+                    } else if (step === -1) {
+                        var siblingNumber = this.$iconContainer.find('.' + this.current).parent().siblings().length + 1,
+                            prevNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').prev().find('li').length,
+                            index = this.$iconContainer.find('.' + this.current).parent().index(),
+                            remain = prevNumber % lineNumber;
+
+                        if (index > remain - 1 && index < lineNumber) {
+                            if (prevNumber >= lineNumber) {
+                                this.index -= lineNumber + remain;
+                            } else {
+                                this.index -= index + 1;
+                            }
+                        } else if (index <= remain - 1) {
+                            this.index -= remain;
+                        } else {
+                            this.index -= lineNumber;
+                        }
+                    }
+                } else {
+                    this.index += lineNumber * step;
+                }
+
+                if (this.index >= this.iconsAll.length) {
+                    this.index = this.iconsAll.length - 1;
+                } else if (this.index < 0) {
+                    this.index = 0;
+                }
+                this.current = this.iconsAll[this.index];
+                this.set(this.current);
+            },
+            enter: function() {
+                if (this.$mask) {
+                    if (this.current) {
+                        this.set(this.current);
+                        this._hide();
+                    }
+                } else {
+                    this._open();
+                }
+            },
+            esc: function() {
+                this.set(this.previous);
+                this._hide();
+            },
+            tab: function() {
+                this._hide();
+            },
+            gather: function(self) {
+                return {
+                    left: $.proxy(this.horizontalChange, self, '-1'),
+                    up: $.proxy(this.verticalChange, self, '-1'),
+                    right: $.proxy(this.horizontalChange, self, '1'),
+                    down: $.proxy(this.verticalChange, self, '1'),
+                    enter: $.proxy(this.enter, self),
+                    esc: $.proxy(this.esc, self)
+                };
+            },
+            press: function(e) {
+                var key = e.keyCode || e.which;
+
+                if (key === 9) {
+                    this._keyboard.tab.call(this);
+                }
+
+                if (key in this.map && typeof this.map[key] === 'function') {
+                    e.preventDefault();
+                    return this.map[key].call(this);
+                } else {
+                    var self = this;
+                    this.$iconPicker.find('.' + this.namespace + '-search-input').one('keyup', function() {
+                        self.searching($(this).val());
+                    });
+                }
+            },
+            attach: function(self, map) {
+                var key, _self = this;
+                for (key in map) {
+                    if (map.hasOwnProperty(key)) {
+                        var uppercase = [],
+                            parts = self._stringSeparate(key, '_'),
+                            len = parts.length;
+
+                        if (len === 1) {
+                            uppercase[0] = parts[0].toUpperCase();
+                            self.map[this.keys()[uppercase[0]]] = map[key];
+                        } else {
+                            for (var i = 0; i < parts.length; i++) {
+                                uppercase[i] = parts[i].toUpperCase();
+                                if (i === 0) {
+                                    if (self.map[this.keys()[uppercase[0]]] === undefined) {
+                                        self.map[this.keys()[uppercase[0]]] = {};
+                                    }
+                                } else {
+                                    self.map[this.keys()[uppercase[0]]][this.keys()[uppercase[i]]] = map[key];
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!self.bound) {
+                    self.bound = true;
+                    self.$wrapper.on('keydown', function(e) {
+                        _self.press.call(self, e);
+                    });
+                }
+            }
+        },
+        load: function(source) {
+            if (typeof source !== 'undefined') {
+                this.source = this._processSource(source);
             }
 
             if (this.options.flat) {
