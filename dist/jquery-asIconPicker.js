@@ -1,4 +1,4 @@
-/*! asIconPicker - v0.1.0 - 2014-07-16
+/*! asIconPicker - v0.1.0 - 2014-08-06
 * https://github.com/amazingsurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
@@ -173,13 +173,9 @@
                 this._hide();
             }, this)).on('mouseenter', '.' + this.namespace + '-list li', $.proxy(function(e) {
                 this.highlight($(e.currentTarget).children().data('value'));
-            }, this)).on('mouseleave', '.' + this.namespace + '-list li', $.proxy(function(e) {
+            }, this)).on('mouseleave', '.' + this.namespace + '-list li', $.proxy(function() {
                 this.highlight();
             }, this));
-
-            this.$iconContainer.on('change.asScrollbar', function(e, val) {
-                self.value = val;
-            });
 
             /**
              * Stop click propagation on iconpicker
@@ -196,11 +192,9 @@
         },
 
         _getSourceFromSelect: function() {
-            var self = this;
             var source = [];
             this.$element.children().each(function(i, el) {
-                var item = {},
-                    $el = $(el);
+                var $el = $(el);
                 if ($el.is('optgroup')) {
                     var group = $.extend({}, $el.data(), {
                         'label': el.label,
@@ -375,14 +369,14 @@
                     html: '<i class="' + self.options.extraClass + ' ' + item.value + '" data-value="' + item.value + '"></i>',
                     'title': (self.options.tooltip) ? item.text : ''
                 });
-            }
-
+            };
+            var $group;
             for (var i = 0, item; i < tempIcons.length; i++) {
                 item = tempIcons[i];
 
                 if (typeof item.label !== 'undefined') {
                     if (item.items.length) {
-                        var $group = $('<div class="' + this.namespace + '-group"><div class="' + this.namespace + '-group-label">' + item.label + ':</div><ul class="' + this.namespace + '-list"></ul></div>').appendTo(this.$iconContainer);
+                        $group = $('<div class="' + this.namespace + '-group"><div class="' + this.namespace + '-group-label">' + item.label + ':</div><ul class="' + this.namespace + '-list"></ul></div>').appendTo(this.$iconContainer);
                     }
                     for (var j = 0, option; option = item.items[j]; j++) {
                         itemHTML(option).appendTo($group.find('ul'));
@@ -407,16 +401,14 @@
             this.index = $.inArray(this.current, this.iconsAll);
 
             if (this.index >= 0) {
-                this.set(this.current);
+                this.set(this.current, false);
             } else {
-                this.set();
+                this.set(null, false);
             }
 
             // Add the scrollbar in the iconContainer
-            var self = this;
             this.$iconContainer.asScrollbar({
-                contentClass: self.namespace + '-icons-content',
-                wrapperClass: self.namespace + '-icons-wrapper'
+                namespace: self.namespace + '-icons'
             });
 
             this._trigger('afterFill');
@@ -431,8 +423,9 @@
             // /[\347]/g, // c
             // /[\377]/g // y
             var k, d = '40-46 50-53 54-57 62-70 71-74 61 47 77'.replace(/\d+/g, '\\3$&').split(' ');
-            for (k in d)
+            for (k in d) {
                 s = s.toLowerCase().replace(RegExp('[' + d[k] + ']', 'g'), 'aeiouncy'.charAt(k));
+            }
             return s;
         },
         highlight: function(icon) {
@@ -577,9 +570,10 @@
                     var siblingNumber = this.$iconContainer.find('.' + this.current).parent().siblings().length + 1,
                         nextNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').next().find('li').length,
                         prevNumber = this.$iconContainer.find('.' + this.current).parents('.' + this.namespace + '-group').prev().find('li').length,
-                        index = this.$iconContainer.find('.' + this.current).parent().index();
+                        index = this.$iconContainer.find('.' + this.current).parent().index(),
+                        remain;
                     if (step === 1) {
-                        var remain = siblingNumber % lineNumber;
+                        remain = siblingNumber % lineNumber;
 
                         if (index + lineNumber >= siblingNumber && nextNumber) {
                             if (index + remain >= siblingNumber && remain > 0) {
@@ -599,7 +593,7 @@
                             this.index += lineNumber;
                         }
                     } else if (step === -1) {
-                        var remain = prevNumber % lineNumber;
+                        remain = prevNumber % lineNumber;
 
                         if (index > remain - 1 && index < lineNumber) {
                             if (prevNumber >= lineNumber) {
@@ -702,12 +696,18 @@
                 }
             },
             _stringSeparate: function(str, separator) {
-                var re = new RegExp("[.\\" + separator + "\\s].*?"),
-                    separator = str.match(re),
-                    parts = str.split(separator);
+                var re = new RegExp("[.\\" + separator + "\\s].*?");
+                separator = str.match(re);
+                var parts = str.split(separator);
                 return parts;
             },
         },
+
+        _update: function() {
+            this.$element.val(this.val());
+            this._trigger('change', this.current);
+        },
+
         load: function(source) {
             if (typeof source !== 'undefined') {
                 this.source = this._processSource(source);
@@ -722,15 +722,9 @@
             }
         },
         get: function() {
-            var current;
-            if (this.current) {
-                current = this.current;
-            } else {
-                current = "";
-            }
-            return current;
+            return this.current;
         },
-        set: function(icon) {
+        set: function(icon, update) {
             this.$iconContainer.find('.' + this.namespace + '-current').removeClass(this.namespace + '-current');
             if (icon) {
                 this.$iconContainer.find('[data-value="' + icon + '"]').parent().addClass(this.namespace + '-current');
@@ -739,19 +733,21 @@
                 this.$iconPicker.find('.' + this.namespace + '-selected-icon').addClass(this.namespace + '-none-selected').html('<i class="' + this.options.extraClass + ' ' + this.options.iconPrefix + 'ban' + '"></i>' + this.options.emptyText);
             }
 
-            // Set the value of the element and trigger change event
-            this.$element.val(icon).triggerHandler('change');
+
             this.current = icon;
             this.index = $.inArray(this.current, this.iconsAll);
             this.scrollToSelectedIcon();
 
+            if (update !== false) {
+                this._update();
+            }
         },
         clear: function() {
             this.set(null);
         },
         val: function(value) {
             if (typeof value === 'undefined') {
-                return this.options.process(this.value);
+                return this.options.process(this.current);
             }
 
             var value_obj = this.options.parse(value);

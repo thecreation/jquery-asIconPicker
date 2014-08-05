@@ -48,6 +48,15 @@ module.exports = function(grunt) {
                     src: 'jquery-asScrollbar.min.js',
                     dest: 'demo/js'
                 }]
+            },
+            jquery_wheel: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    cwd: 'bower_components/jquery-wheel/',
+                    src: 'jquery.mousewheel.min.js',
+                    dest: 'demo/js'
+                }]
             }
         },
 
