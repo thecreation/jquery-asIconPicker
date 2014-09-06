@@ -141,6 +141,19 @@ module.exports = function(grunt) {
             }
         },
 
+        // -- autoprefixer config ----------------------------------------------------------
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.3', 'android 4', 'opera 12']
+            },
+            src: {
+                expand: true,
+                cwd: 'css/',
+                src: ['*.css', '!*.min.css'],
+                dest: 'css/'
+            }
+        },
+
         // -- replace Config --------------------------------------------------------
         replace: {
             bower: {
@@ -171,7 +184,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['js', 'dist', 'css']);
 
     grunt.registerTask('dist', ['clean', 'concat', 'uglify']);
-    grunt.registerTask('css', ['less']);
+    grunt.registerTask('css', ['less', 'autoprefixer']);
     grunt.registerTask('version', [
         'replace:bower',
         'replace:jquery'

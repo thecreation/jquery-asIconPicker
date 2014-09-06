@@ -11,6 +11,7 @@
     "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-less": "*",
+    "grunt-autoprefixer": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-jsbeautifier": "*",
