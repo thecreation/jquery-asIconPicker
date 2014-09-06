@@ -1,6 +1,25 @@
 {
   "name": "jquery-asIconPicker",
+  "title": "jQuery asIconPicker",
+  "description": "a jquery plugin",
   "version": "0.1.0",
+  "homepage": "https://github.com/amazingSurge/jquery-asIconPicker",
+  "author": {
+    "name": "amazingSurge",
+    "email": "amazingSurge@yahoo.com",
+    "url": "amazingSurge.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amazingSurge/jquery-asIconPicker.git"
+  },
+  "bugs": "https://github.com/amazingSurge/jquery-asIconPicker/issues",
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "https://github.com/amazingSurge/jquery-asIconPicker/blob/master/LICENSE-GPL"
+    }
+  ],
   "engines": {
     "node": ">= 0.8.0"
   },
