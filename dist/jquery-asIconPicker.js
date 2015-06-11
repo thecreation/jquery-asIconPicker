@@ -1,5 +1,5 @@
 /*! asIconPicker - v0.1.0 - 2014-09-06
-* https://github.com/amazingsurge/jquery-asIconPicker
+* https://github.com/amazingSurge/jquery-asIconPicker
 * Copyright (c) 2014 amazingSurge; Licensed MIT */
 (function($, document, window, undefined) {
     // Optional, but considered best practice by some

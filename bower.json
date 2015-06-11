@@ -10,7 +10,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": ">=1.8.3",
+    "jquery": ">=1.11.0",
     "fontAwesome": "git@github.com:FortAwesome/Font-Awesome.git",
     "jquery-asTooltip": "git@github.com:amazingSurge/jquery-asTooltip.git",
     "jquery-asScrollbar": "git@github.com:amazingSurge/jquery-asScrollbar.git"
