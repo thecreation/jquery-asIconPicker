@@ -1,0 +1,282 @@
+@import "icon";
+.asIconPicker-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 304px;
+  font-size: 20px;
+  color: #999;
+  background-color: #fff;
+}
+
+.asIconPicker-selector {
+  position: relative;
+  border: 2px solid #bbb;
+  .asIconPicker-selected-icon {
+    display: block;
+    padding: 6px 40px 7px 14px;
+    font-size: 16px;
+    > i {
+      margin-right: 10px;
+      font-size: 18px;
+      vertical-align: text-top;
+    }
+  }
+  .asIconPicker-selector-arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    > i {
+      position: absolute;
+      top: 9px;
+      right: 10px;
+      font-family: "asFont";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      line-height: 1;
+      color: #bbb;
+      text-transform: none;
+      // Better Font Rendering ===========
+      -moz-osx-font-smoothing: grayscale;
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      &::before {
+        content: "\e604";
+      }
+    }
+  }
+  &.asIconPicker_active {
+    border: 2px solid #5cafda;
+    .asIconPicker-selector-arrow {
+      > i::before {
+        content: "\e605";
+      }
+    }
+  }
+}
+
+.asIconPicker-none-selected {
+  color: #ddd;
+}
+
+.asIconPicker-selector-popup {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 99;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #fff;
+  border: 2px solid #e5e5e5;
+  &.asIconPicker_isFlat {
+    top: 0;
+    margin-top: 10px;
+  }
+}
+
+.asIconPicker_active {
+  display: block !important;
+}
+
+.asIconPicker_hide {
+  display: none !important;
+}
+
+.asIconPicker_isFlat {
+  position: relative !important;
+}
+
+.asIconPicker_disable {
+  pointer-events: none !important;
+  background-color: #eee;
+  .asIconPicker-selector {
+    border-color: #ddd;
+  }
+}
+
+.asIconPicker_with_search {
+  .asIconPicker-selector-search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    width: 280px;
+    width: #{"-webkit-calc(100% - 20px)"};
+    width: #{"calc(100% - 20px)"};
+    height: 36px;
+    padding: 10px;
+    background-color: #fff;
+    .asIconPicker-search-input {
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      padding-right: 40px;
+      padding-left: 10px;
+      font-size: 12px;
+      border: 2px solid rgba(0, 0, 0, .1);
+      outline: none;
+    }
+    > i {
+      position: absolute;
+      top: 20px;
+      right: 23px;
+      font-family: "asFont";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      line-height: 1;
+      color: rgba(0, 0, 0, .2);
+      text-transform: none;
+      cursor: pointer;
+      // Better Font Rendering ===========
+      -moz-osx-font-smoothing: grayscale;
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      &::before {
+        content: "\e600";
+      }
+    }
+    &.asIconPicker-isSearching {
+      > i::before {
+        content: "\e627";
+      }
+    }
+  }
+  .asIconPicker-icons-container {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 55px;
+    overflow: auto;
+    &.is-scrolled {
+      -web-box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
+      -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
+    }
+    .asIconPicker-icons-wrapper {
+      max-height: 314px;
+    }
+    .asIconPicker-icons-content {
+      padding: 10px;
+    }
+    .asIconPicker-group {
+      margin-bottom: 14px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .asIconPicker-group-label {
+        margin-bottom: 9px;
+        font-size: 16px;
+        color: #777;
+      }
+    }
+    .asIconPicker-list {
+      padding: 0;
+      margin: 0;
+      li {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        width: 55px;
+        width: #{"-webkit-calc(20% - 1px)"};
+        width: #{"calc(20% - 1px)"};
+        height: 55px;
+        margin-top: -1px;
+        margin-left: -1px;
+        line-height: 55px;
+        color: #9ea6a9;
+        text-align: center;
+        list-style: none;
+        cursor: pointer;
+        border: 1px solid #f2f2f2;
+        &.asIconPicker-current {
+          z-index: 9;
+          color: #fff;
+          background-color: #5cafda;
+          border-color: #5cafda;
+        }
+        &.asIconPicker-current:hover {
+          color: #fff;
+        }
+        &.asIconPicker_hover {
+          color: #6a6f76;
+        }
+      }
+    }
+    .asIconPicker-noMatch {
+      display: block;
+      margin: 9px;
+      line-height: 55px;
+      color: #9ea6a9;
+      text-align: center;
+      border: 1px solid #f2f2f2;
+    }
+    .asIconPicker-icons-scrollbar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      line-height: 0;
+      background-color: transparent;
+      .asIconPicker-icons-handle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: 0;
+        cursor: pointer;
+        background: #ddd;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+      }
+      &.asIconPicker-icons-vertical {
+        width: 4px;
+        height: 100%;
+      }
+      &.asIconPicker-icons-vertical .asIconPicker-icons-handle {
+        width: 100%;
+      }
+    }
+  }
+  .asIconPicker-loading {
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-size: 24px;
+    color: #eee;
+    text-align: center;
+    > i {
+      font-family: "asFont";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      line-height: 1;
+      text-transform: none;
+      speak: none;
+      // Better Font Rendering ===========
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      &::before {
+        content: "\e624";
+      }
+    }
+  }
+}
+
+.asIconPicker-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}

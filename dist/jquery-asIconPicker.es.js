@@ -1,23 +1,273 @@
-/*
- * jquery-asIconPicker
- * https://github.com/amazingSurge/jquery-asIconPicker
- *
- * Copyright (c) 2014 amazingSurge
- * Licensed under the MIT license.
- */
+/**
+* jQuery asIconPicker
+* a jquery plugin
+* Compiled: Tue Aug 16 2016 11:42:02 GMT+0800 (CST)
+* @version v0.1.0
+* @link https://github.com/amazingSurge/jquery-asIconPicker
+* @copyright LGPL-3.0
+*/
+import $$1 from 'jQuery';
 
-import $ from 'jQuery';
-import defaults from './defaults';
-import _keyboard from './_keyboard';
+var defaults = {
+  namespace: 'asIconPicker',
+  source: false, // Icons source
+  tooltip: true,
+  hasSearch: true,
+  extraClass: 'fa',
+  iconPrefix: 'fa-',
+  emptyText: 'None Selected',
+  searchText: 'Search',
+  cancelSelected: true,
+  keyboard: true,
+  flat: false,
+  heightToScroll: '290',
+
+  iconPicker() {
+    'use strict';
+    return '<div class="namespace-selector">' +
+      '<span class="namespace-selected-icon">' +
+      'None selected' +
+      '</span>' +
+      '<span class="namespace-selector-arrow">' +
+      '<i></i>' +
+      '</span>' +
+      '</div>' +
+      '<div class="namespace-selector-popup">' +
+      '<div class="namespace-icons-container"></div>' +
+      '</div>';
+  },
+  iconSearch() {
+    'use strict';
+    return '<div class="namespace-selector-search">' +
+      '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' +
+      '<i class="namespace-search-icon"></i>' +
+      '</div>';
+  },
+  formatNoMatches() {
+    'use strict';
+    return 'No matches found';
+  },
+  errorHanding() {},
+  process(value) {
+    'use strict';
+    if (value && value.match(this.iconPrefix)) {
+      return value.replace(this.iconPrefix, '');
+    }
+    return value;
+  },
+  parse(value) {
+    'use strict';
+    if (value.match(this.iconPrefix)) {
+      return value;
+    }
+    return this.iconPrefix + value;
+  },
+  // callback
+  onInit: null,
+  onReady: null,
+  onAfterFill: null
+};
+
+let _keyboard = {
+  init(self) {
+    'use strict';
+    this.attach(self, this.gather(self));
+  },
+  destroy(self) {
+    'use strict';
+    self.$wrapper.off('keydown');
+    self.bound = false;
+  },
+  keys() {
+    'use strict';
+    return {
+      LEFT: 37,
+      UP: 38,
+      RIGHT: 39,
+      DOWN: 40,
+      ENTER: 13,
+      ESC: 27
+    };
+  },
+  horizontalChange(step) {
+    'use strict';
+    if (!this.$mask && !this.options.flat) {
+      this._open();
+      return;
+    }
+    this.index += parseInt(step, 10);
+    if (this.index >= this.iconsAll.length) {
+      this.index = this.iconsAll.length - 1;
+    } else if (this.index < 0) {
+      this.index = 0;
+    }
+    this.current = this.iconsAll[this.index];
+    this.set(this.current);
+  },
+  verticalChange(step) {
+    'use strict';
+    if (!this.$mask && !this.options.flat) {
+      this._open();
+      return;
+    }
+    const ulHeight = this.$iconContainer.find(`.${this.namespace}-list`).width();
+    const liHeight = this.$iconContainer.find(`.${this.namespace}-list li`).width(),
+      lineNumber = Math.floor(ulHeight / liHeight);
+
+    step = parseInt(step, 10);
+
+    if (this.index >= 0 && this.$iconContainer.find(`.${this.namespace}-group`).text()) {
+      const siblingNumber = this.$iconContainer.find(`.${this.current}`).parent().siblings().length + 1;
+      const nextNumber = this.$iconContainer.find(`.${this.current}`).parents(`.${this.namespace}-group`).next().find('li').length;
+      const prevNumber = this.$iconContainer.find(`.${this.current}`).parents(`.${this.namespace}-group`).prev().find('li').length;
+      const index = this.$iconContainer.find(`.${this.current}`).parent().index();
+      let remain;
+      if (step === 1) {
+        remain = siblingNumber % lineNumber;
+
+        if (index + lineNumber >= siblingNumber && nextNumber) {
+          if (index + remain >= siblingNumber && remain > 0) {
+            if (index + remain >= siblingNumber + nextNumber) {
+              this.index += nextNumber;
+            } else {
+              this.index += remain;
+            }
+          } else {
+            if (index + remain + lineNumber >= siblingNumber + nextNumber) {
+              this.index += remain + nextNumber;
+            } else {
+              this.index += remain + lineNumber;
+            }
+          }
+        } else {
+          this.index += lineNumber;
+        }
+      } else if (step === -1) {
+        remain = prevNumber % lineNumber;
+
+        if (index > remain - 1 && index < lineNumber) {
+          if (prevNumber >= lineNumber) {
+            this.index -= lineNumber + remain;
+          } else {
+            this.index -= index + 1;
+          }
+        } else if (index <= remain - 1) {
+          this.index -= remain;
+        } else {
+          this.index -= lineNumber;
+        }
+      }
+    } else {
+      this.index += lineNumber * step;
+    }
+
+    if (this.index >= this.iconsAll.length) {
+      this.index = this.iconsAll.length - 1;
+    } else if (this.index < 0) {
+      this.index = 0;
+    }
+    this.current = this.iconsAll[this.index];
+    this.set(this.current);
+  },
+  enter() {
+    'use strict';
+    if (this.$mask) {
+      if (this.current) {
+        this.set(this.current);
+        this._hide();
+      }
+    } else {
+      this._open();
+    }
+  },
+  esc() {
+    'use strict';
+    this.set(this.previous);
+    this._hide();
+  },
+  tab() {
+    'use strict';
+    this._hide();
+  },
+  gather(self) {
+    'use strict';
+    return {
+      left: $.proxy(this.horizontalChange, self, '-1'),
+      up: $.proxy(this.verticalChange, self, '-1'),
+      right: $.proxy(this.horizontalChange, self, '1'),
+      down: $.proxy(this.verticalChange, self, '1'),
+      enter: $.proxy(this.enter, self),
+      esc: $.proxy(this.esc, self)
+    };
+  },
+  press(e) {
+    'use strict';
+    const key = e.keyCode || e.which;
+
+    if (key === 9) {
+      this._keyboard.tab.call(this);
+    }
+
+    if (key in this.map && typeof this.map[key] === 'function') {
+      e.preventDefault();
+      return this.map[key].call(this);
+    }
+    const self = this;
+    this.$iconPicker.find(`.${this.namespace}-search-input`).one('keyup', function() {
+      self.searching($(this).val());
+    });
+  },
+  attach(self, map) {
+    'use strict';
+    let key;
+    const _self = this;
+    for (key in map) {
+      if (map.hasOwnProperty(key)) {
+        const parts = _self._stringSeparate(key, '_'),
+          uppercase = [];
+        const len = parts.length;
+
+        if (len === 1) {
+          uppercase[0] = parts[0].toUpperCase();
+          self.map[this.keys()[uppercase[0]]] = map[key];
+        } else {
+          for (let i = 0; i < parts.length; i++) {
+            uppercase[i] = parts[i].toUpperCase();
+            if (i === 0) {
+              if (self.map[this.keys()[uppercase[0]]] === undefined) {
+                self.map[this.keys()[uppercase[0]]] = {};
+              }
+            } else {
+              self.map[this.keys()[uppercase[0]]][this.keys()[uppercase[i]]] = map[key];
+            }
+          }
+        }
+      }
+    }
+    if (!self.bound) {
+      self.bound = true;
+      self.$wrapper.on('keydown', e => {
+        _self.press.call(self, e);
+      });
+    }
+  },
+  _stringSeparate(str, separator) {
+    'use strict';
+    const re = new RegExp(`[.\\${separator}\\s].*?`);
+    separator = str.match(re);
+    const parts = str.split(separator);
+    return parts;
+  }
+}
 
 const pluginName = 'asIconPicker';
 
 class asIconPicker {
   constructor(element, options) {
     this.element = element;
-    this.$element = $(element);
+    this.$element = $$1(element);
 
-    this.options = $.extend({}, defaults, options, this.$element.data());
+    this.options = $$1.extend({}, defaults, options, this.$element.data());
 
     this._plugin = pluginName;
     this.namespace = this.options.namespace;
@@ -42,9 +292,9 @@ class asIconPicker {
 
     const iconPicker = this.options.iconPicker().replace(/namespace/g, this.namespace),
       iconSearch = this.options.iconSearch().replace(/namespace/g, this.namespace).replace(/searchText/g, this.options.searchText);
-    this.$iconPicker = $(iconPicker);
+    this.$iconPicker = $$1(iconPicker);
     this.$iconContainer = this.$iconPicker.find(`.${this.namespace}-icons-container`);
-    this.$iconSearch = $(iconSearch);
+    this.$iconSearch = $$1(iconSearch);
 
     if (this.options.hasSearch) {
       this.$iconContainer.before(this.$iconSearch);
@@ -96,8 +346,8 @@ class asIconPicker {
     }
 
     if (!this.options.keyboard) {
-      this.$iconPicker.find(`.${this.namespace}-search-input`).keyup($.proxy(e => {
-        self.searching($(e.currentTarget).val());
+      this.$iconPicker.find(`.${this.namespace}-search-input`).keyup($$1.proxy(e => {
+        self.searching($$1(e.currentTarget).val());
       }, this));
     } else {
       this.$wrapper.on('focus', () => {
@@ -105,22 +355,22 @@ class asIconPicker {
       });
     }
 
-    this.$iconPicker.on('click', `.${this.namespace}-isSearching .${this.namespace}-search-icon`, $.proxy(function() {
+    this.$iconPicker.on('click', `.${this.namespace}-isSearching .${this.namespace}-search-icon`, $$1.proxy(function() {
       this.$iconPicker.find(`.${this.namespace}-search-input`).focus().select();
       this.reset();
     }, this));
 
-    this.$iconContainer.on('click', `.${this.namespace}-list li`, $.proxy(function(e) {
-      if (this.options.cancelSelected && $(e.currentTarget).hasClass(`${this.namespace}-current`)) {
-        $(e.currentTarget).removeClass(`${this.namespace}-current`);
+    this.$iconContainer.on('click', `.${this.namespace}-list li`, $$1.proxy(function(e) {
+      if (this.options.cancelSelected && $$1(e.currentTarget).hasClass(`${this.namespace}-current`)) {
+        $$1(e.currentTarget).removeClass(`${this.namespace}-current`);
         this.set();
         return;
       }
-      this.set($(e.currentTarget).children().data('value'));
+      this.set($$1(e.currentTarget).children().data('value'));
       this._hide();
-    }, this)).on('mouseenter', `.${this.namespace}-list li`, $.proxy(function(e) {
-      this.highlight($(e.currentTarget).children().data('value'));
-    }, this)).on('mouseleave', `.${this.namespace}-list li`, $.proxy(function() {
+    }, this)).on('mouseenter', `.${this.namespace}-list li`, $$1.proxy(function(e) {
+      this.highlight($$1(e.currentTarget).children().data('value'));
+    }, this)).on('mouseleave', `.${this.namespace}-list li`, $$1.proxy(function() {
       this.highlight();
     }, this));
 
@@ -141,9 +391,9 @@ class asIconPicker {
   _getSourceFromSelect() {
     const source = [];
     this.$element.children().each((i, el) => {
-      const $el = $(el);
+      const $el = $$1(el);
       if ($el.is('optgroup')) {
-        const group = $.extend({}, $el.data(), {
+        const group = $$1.extend({}, $el.data(), {
           label: el.label,
           items: []
         });
@@ -185,7 +435,7 @@ class asIconPicker {
     };
     const processSource = [];
 
-    if (!$.isArray(source)) {
+    if (!$$1.isArray(source)) {
       for (const key in source) {
         if ({}.hasOwnProperty.call(source, key)) {
           processSource.push(processItem(key, source[key]));
@@ -194,7 +444,7 @@ class asIconPicker {
     } else {
       for (let i = 0; i < source.length; i++) {
         if (source[i].items) {
-          if ($.isArray(source[i].items)) {
+          if ($$1.isArray(source[i].items)) {
             for (let j = 0; j < source[i].items.length; j++) {
               source[i].items[j] = processItem(j, source[i].items[j]);
             }
@@ -252,7 +502,7 @@ class asIconPicker {
         if (typeof item.items !== 'undefined') {
           groupSearched = {
             label: item.label,
-            items: $.grep(item.items, n => isMatchedItem(n))
+            items: $$1.grep(item.items, n => isMatchedItem(n))
           };
 
           if (groupSearched.items.length > 0) {
@@ -310,7 +560,7 @@ class asIconPicker {
     // List icons
     const itemHTML = item => {
       self.iconsAll.push(item.value);
-      return $('<li/>', {
+      return $$1('<li/>', {
         html: `<i class="${self.options.extraClass} ${item.value}" data-value="${item.value}"></i>`,
         title: (self.options.tooltip) ? item.text : ''
       });
@@ -321,7 +571,7 @@ class asIconPicker {
 
       if (typeof item.label !== 'undefined') {
         if (item.items.length) {
-          $group = $(`<div class="${this.namespace}-group"><div class="${this.namespace}-group-label">${item.label}:</div><ul class="${this.namespace}-list"></ul></div>`).appendTo(this.$iconContainer);
+          $group = $$1(`<div class="${this.namespace}-group"><div class="${this.namespace}-group-label">${item.label}:</div><ul class="${this.namespace}-list"></ul></div>`).appendTo(this.$iconContainer);
         }
         for (let j = 0, option;
           (option = item.items[j]); j++) {
@@ -330,13 +580,13 @@ class asIconPicker {
       } else {
         const listClass = this.$iconContainer.children().last().attr('class');
         if (listClass !== `${this.namespace}-list`) {
-          $(`<ul class="${this.namespace}-list"></ul>`).appendTo(this.$iconContainer);
+          $$1(`<ul class="${this.namespace}-list"></ul>`).appendTo(this.$iconContainer);
         }
         itemHTML(item).appendTo(this.$iconContainer.children().last());
       }
     }
     if (this.options.tooltip) {
-      $.asTooltip.closeAll();
+      $$1.asTooltip.closeAll();
       this.$iconContainer.find(`.${this.namespace}-list li`).asTooltip({
         namespace: 'asTooltip',
         skin: 'skin-dream',
@@ -344,7 +594,7 @@ class asIconPicker {
       });
     }
 
-    this.index = $.inArray(this.current, this.iconsAll);
+    this.index = $$1.inArray(this.current, this.iconsAll);
 
     if (this.index >= 0) {
       this.set(this.current, false);
@@ -423,7 +673,7 @@ class asIconPicker {
       this.previous = this.current;
       if ($selector.hasClass(this.classes.active) && !self.options.flat) {
         this.$iconPicker.find(`.${this.namespace}-search-input`).focus().select();
-        this.$mask = $('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
+        this.$mask = $$1('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
         this.$mask.on('click', () => {
           self._hide();
         });
@@ -494,7 +744,7 @@ class asIconPicker {
 
 
     this.current = icon;
-    this.index = $.inArray(this.current, this.iconsAll);
+    this.index = $$1.inArray(this.current, this.iconsAll);
     this.scrollToSelectedIcon();
 
     if (update !== false) {
@@ -554,7 +804,7 @@ class asIconPicker {
         }
       } else {
         return this.each(function() {
-          let api = $.data(this, pluginName);
+          let api = $$1.data(this, pluginName);
           if (api && typeof api[options] === 'function') {
             api[options](...params);
           }
@@ -562,8 +812,8 @@ class asIconPicker {
       }
     }
     return this.each(function() {
-      if (!$.data(this, pluginName)) {
-        $.data(this, pluginName, new asIconPicker(this, options));
+      if (!$$1.data(this, pluginName)) {
+        $$1.data(this, pluginName, new asIconPicker(this, options));
       }
     });
 
@@ -573,11 +823,11 @@ class asIconPicker {
 
 // Plugin.defaults = defaults;
 
-$.fn[pluginName] = asIconPicker._jQueryInterface;
-$.fn[pluginName].constructor = asIconPicker;
-$.fn[pluginName].noConflict = function() {
+$$1.fn[pluginName] = asIconPicker._jQueryInterface;
+$$1.fn[pluginName].constructor = asIconPicker;
+$$1.fn[pluginName].noConflict = function() {
   'use strict';
-  $.fn[pluginName] = JQUERY_NO_CONFLICT;
+  $$1.fn[pluginName] = JQUERY_NO_CONFLICT;
   return asIconPicker._jQueryInterface;
 };
 

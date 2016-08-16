@@ -1,16 +1,30 @@
 {
   "name": "jquery-asIconPicker",
   "version": "0.1.0",
+  "description": "a jquery plugin",
   "main": "dist/jquery-asIconPicker.js",
+  "copyright": "amazingSurge",
+  "license": "LGPL-3.0",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
+    "demo",
+    "libs",
+    "package.json",
+    "gulpfile.babel.js",
     "tests"
   ],
+  "homepage": "https://github.com/amazingSurge/jquery-asIconPicker",
+  "authors": [
+    "amazingSurge <amazingSurge@gmail.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
   "dependencies": {
-    "jquery": ">=1.11.0",
+    "jquery": ">=2.1.1",
     "fontAwesome": "git@github.com:FortAwesome/Font-Awesome.git",
     "jquery-asTooltip": "git@github.com:amazingSurge/jquery-asTooltip.git",
     "jquery-asScrollbar": "git@github.com:amazingSurge/jquery-asScrollbar.git"
