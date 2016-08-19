@@ -571,8 +571,6 @@ class asIconPicker {
 
 }
 
-// Plugin.defaults = defaults;
-
 $.fn[pluginName] = asIconPicker._jQueryInterface;
 $.fn[pluginName].constructor = asIconPicker;
 $.fn[pluginName].noConflict = function() {

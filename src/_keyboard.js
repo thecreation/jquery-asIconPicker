@@ -1,4 +1,4 @@
-let _keyboard = {
+let _keyboard : {
   init(self) {
     'use strict';
     this.attach(self, this.gather(self));
