@@ -1,39 +1,45 @@
 /**
-* jQuery asIconPicker
-* a jquery plugin
-* Compiled: Tue Aug 16 2016 11:42:02 GMT+0800 (CST)
-* @version v0.1.0
-* @link https://github.com/amazingSurge/jquery-asIconPicker
-* @copyright LGPL-3.0
+* jQuery asIconPicker v0.2.0
+* https://github.com/amazingSurge/jquery-asIconPicker
+*
+* Copyright (c) amazingSurge
+* Released under the LGPL-3.0 license
 */
 (function(global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'jQuery'], factory);
+    define(['jquery'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('jQuery'));
+    factory(require('jquery'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.jQuery);
-    global.jqueryAsIconPicker = mod.exports;
+    factory(global.jQuery);
+    global.jqueryAsIconPickerEs = mod.exports;
   }
 })(this,
 
-  function(exports, _jQuery) {
+  function(_jquery) {
     'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-
-    var _jQuery2 = _interopRequireDefault(_jQuery);
+    var _jquery2 = _interopRequireDefault(_jquery);
 
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {
         default: obj
       };
     }
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ?
+
+      function(obj) {
+        return typeof obj;
+      }
+      :
+
+      function(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
 
     function _classCallCheck(instance, Constructor) {
       if (!(instance instanceof Constructor)) {
@@ -65,7 +71,8 @@
       };
     }();
 
-    var defaults = {
+    /* eslint no-empty-function:"off" */
+    var DEFAULTS = {
       namespace: 'asIconPicker',
       source: false, // Icons source
       tooltip: true,
@@ -80,24 +87,16 @@
       heightToScroll: '290',
 
       iconPicker: function iconPicker() {
-        'use strict';
-
         return '<div class="namespace-selector">' + '<span class="namespace-selected-icon">' + 'None selected' + '</span>' + '<span class="namespace-selector-arrow">' + '<i></i>' + '</span>' + '</div>' + '<div class="namespace-selector-popup">' + '<div class="namespace-icons-container"></div>' + '</div>';
       },
       iconSearch: function iconSearch() {
-        'use strict';
-
         return '<div class="namespace-selector-search">' + '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' + '<i class="namespace-search-icon"></i>' + '</div>';
       },
       formatNoMatches: function formatNoMatches() {
-        'use strict';
-
         return 'No matches found';
       },
       errorHanding: function errorHanding() {},
       process: function process(value) {
-        'use strict';
-
         if (value && value.match(this.iconPrefix)) {
 
           return value.replace(this.iconPrefix, '');
@@ -106,8 +105,6 @@
         return value;
       },
       parse: function parse(value) {
-        'use strict';
-
         if (value.match(this.iconPrefix)) {
 
           return value;
@@ -122,21 +119,15 @@
       onAfterFill: null
     };
 
-    var _keyboard = {
+    var keyboard = {
       init: function init(self) {
-        'use strict';
-
         this.attach(self, this.gather(self));
       },
       destroy: function destroy(self) {
-        'use strict';
-
         self.$wrapper.off('keydown');
         self.bound = false;
       },
       keys: function keys() {
-        'use strict';
-
         return {
           LEFT: 37,
           UP: 38,
@@ -147,8 +138,6 @@
         };
       },
       horizontalChange: function horizontalChange(step) {
-        'use strict';
-
         if (!this.$mask && !this.options.flat) {
           this._open();
 
@@ -165,8 +154,6 @@
         this.set(this.current);
       },
       verticalChange: function verticalChange(step) {
-        'use strict';
-
         if (!this.$mask && !this.options.flat) {
           this._open();
 
@@ -237,8 +224,6 @@
         this.set(this.current);
       },
       enter: function enter() {
-        'use strict';
-
         if (this.$mask) {
 
           if (this.current) {
@@ -250,19 +235,13 @@
         }
       },
       esc: function esc() {
-        'use strict';
-
         this.set(this.previous);
         this._hide();
       },
       tab: function tab() {
-        'use strict';
-
         this._hide();
       },
       gather: function gather(self) {
-        'use strict';
-
         return {
           left: $.proxy(this.horizontalChange, self, '-1'),
           up: $.proxy(this.verticalChange, self, '-1'),
@@ -273,8 +252,6 @@
         };
       },
       press: function press(e) {
-        'use strict';
-
         var key = e.keyCode || e.which;
 
         if (key === 9) {
@@ -286,24 +263,23 @@
 
           return this.map[key].call(this);
         }
-        var self = this;
+        var that = this;
         this.$iconPicker.find('.' + this.namespace + '-search-input').one('keyup',
 
           function() {
-            self.searching($(this).val());
+            that.searching($(this).val());
           }
         );
       },
       attach: function attach(self, map) {
-        'use strict';
+        var _this = this;
 
         var key = void 0;
-        var _self = this;
 
         for (key in map) {
 
           if (map.hasOwnProperty(key)) {
-            var parts = _self._stringSeparate(key, '_'),
+            var parts = this._stringSeparate(key, '_'),
               uppercase = [];
             var len = parts.length;
 
@@ -333,14 +309,12 @@
           self.$wrapper.on('keydown',
 
             function(e) {
-              _self.press.call(self, e);
+              _this.press.call(self, e);
             }
           );
         }
       },
       _stringSeparate: function _stringSeparate(str, separator) {
-        'use strict';
-
         var re = new RegExp('[.\\' + separator + '\\s].*?');
         separator = str.match(re);
         var parts = str.split(separator);
@@ -349,18 +323,17 @@
       }
     };
 
-    var pluginName = 'asIconPicker';
+    var NAMESPACE$1 = 'asIconPicker';
 
     var asIconPicker = function() {
       function asIconPicker(element, options) {
         _classCallCheck(this, asIconPicker);
 
         this.element = element;
-        this.$element = (0, _jQuery2.default)(element);
+        this.$element = (0, _jquery2.default)(element);
 
-        this.options = _jQuery2.default.extend({}, defaults, options, this.$element.data());
+        this.options = _jquery2.default.extend({}, DEFAULTS, options, this.$element.data());
 
-        this._plugin = pluginName;
         this.namespace = this.options.namespace;
 
         this.classes = {
@@ -383,9 +356,9 @@
 
         var iconPicker = this.options.iconPicker().replace(/namespace/g, this.namespace),
           iconSearch = this.options.iconSearch().replace(/namespace/g, this.namespace).replace(/searchText/g, this.options.searchText);
-        this.$iconPicker = (0, _jQuery2.default)(iconPicker);
+        this.$iconPicker = (0, _jquery2.default)(iconPicker);
         this.$iconContainer = this.$iconPicker.find('.' + this.namespace + '-icons-container');
-        this.$iconSearch = (0, _jQuery2.default)(iconSearch);
+        this.$iconSearch = (0, _jquery2.default)(iconSearch);
 
         if (this.options.hasSearch) {
           this.$iconContainer.before(this.$iconSearch);
@@ -409,7 +382,7 @@
       _createClass(asIconPicker, [{
         key: 'init',
         value: function init() {
-          var self = this;
+          var that = this;
           // Hide source element
           this.$element.hide();
 
@@ -430,35 +403,35 @@
            * On down arrow click
            */
 
-          if (!self.options.flat) {
+          if (!that.options.flat) {
             this.$wrapper.find('.' + this.namespace + '-selector').on('click',
 
               function() {
                 // Open/Close the icon picker
-                self._open();
+                that._open();
               }
             );
           } else {
-            self._open();
+            that._open();
           }
 
           if (!this.options.keyboard) {
-            this.$iconPicker.find('.' + this.namespace + '-search-input').keyup(_jQuery2.default.proxy(
+            this.$iconPicker.find('.' + this.namespace + '-search-input').keyup(_jquery2.default.proxy(
 
               function(e) {
-                self.searching((0, _jQuery2.default)(e.currentTarget).val());
+                that.searching((0, _jquery2.default)(e.currentTarget).val());
               }
               , this));
           } else {
             this.$wrapper.on('focus',
 
               function() {
-                _keyboard.init(self);
+                keyboard.init(that);
               }
             );
           }
 
-          this.$iconPicker.on('click', '.' + this.namespace + '-isSearching .' + this.namespace + '-search-icon', _jQuery2.default.proxy(
+          this.$iconPicker.on('click', '.' + this.namespace + '-isSearching .' + this.namespace + '-search-icon', _jquery2.default.proxy(
 
             function() {
               this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
@@ -466,24 +439,24 @@
             }
             , this));
 
-          this.$iconContainer.on('click', '.' + this.namespace + '-list li', _jQuery2.default.proxy(
+          this.$iconContainer.on('click', '.' + this.namespace + '-list li', _jquery2.default.proxy(
 
             function(e) {
-              if (this.options.cancelSelected && (0, _jQuery2.default)(e.currentTarget).hasClass(this.namespace + '-current')) {
-                (0, _jQuery2.default)(e.currentTarget).removeClass(this.namespace + '-current');
+              if (this.options.cancelSelected && (0, _jquery2.default)(e.currentTarget).hasClass(this.namespace + '-current')) {
+                (0, _jquery2.default)(e.currentTarget).removeClass(this.namespace + '-current');
                 this.set();
 
                 return;
               }
-              this.set((0, _jQuery2.default)(e.currentTarget).children().data('value'));
+              this.set((0, _jquery2.default)(e.currentTarget).children().data('value'));
               this._hide();
             }
-            , this)).on('mouseenter', '.' + this.namespace + '-list li', _jQuery2.default.proxy(
+            , this)).on('mouseenter', '.' + this.namespace + '-list li', _jquery2.default.proxy(
 
             function(e) {
-              this.highlight((0, _jQuery2.default)(e.currentTarget).children().data('value'));
+              this.highlight((0, _jquery2.default)(e.currentTarget).children().data('value'));
             }
-            , this)).on('mouseleave', '.' + this.namespace + '-list li', _jQuery2.default.proxy(
+            , this)).on('mouseleave', '.' + this.namespace + '-list li', _jquery2.default.proxy(
 
             function() {
               this.highlight();
@@ -497,7 +470,7 @@
 
             function(event) {
               event.stopPropagation();
-              self.$iconPicker.find('.' + self.namespace + '-search-input').focus().select();
+              that.$iconPicker.find('.' + that.namespace + '-search-input').focus().select();
 
               return false;
             }
@@ -514,10 +487,10 @@
           this.$element.children().each(
 
             function(i, el) {
-              var $el = (0, _jQuery2.default)(el);
+              var $el = (0, _jquery2.default)(el);
 
               if ($el.is('optgroup')) {
-                var group = _jQuery2.default.extend({}, $el.data(), {
+                var group = _jquery2.default.extend({}, $el.data(), {
                   label: el.label,
                   items: []
                 });
@@ -566,7 +539,7 @@
           };
           var processSource = [];
 
-          if (!_jQuery2.default.isArray(source)) {
+          if (!_jquery2.default.isArray(source)) {
 
             for (var key in source) {
 
@@ -580,7 +553,7 @@
 
               if (source[i].items) {
 
-                if (_jQuery2.default.isArray(source[i].items)) {
+                if (_jquery2.default.isArray(source[i].items)) {
 
                   for (var j = 0; j < source[i].items.length; j++) {
                     source[i].items[j] = processItem(j, source[i].items[j]);
@@ -623,7 +596,8 @@
       }, {
         key: 'searching',
         value: function searching(value) {
-          var self = this;
+          var _this2 = this;
+
           // If the string is not empty
 
           if (value === '') {
@@ -640,7 +614,7 @@
           this.iconsSearched = [];
 
           var isMatchedItem = function isMatchedItem(item) {
-            return self.replaceDiacritics(item.text).toLowerCase().search(value.toLowerCase()) >= 0;
+            return _this2.replaceDiacritics(item.text).toLowerCase().search(value.toLowerCase()) >= 0;
           };
           var groupSearched = {};
           // Actual search
@@ -650,7 +624,7 @@
             if (typeof item.items !== 'undefined') {
               groupSearched = {
                 label: item.label,
-                items: _jQuery2.default.grep(item.items,
+                items: _jquery2.default.grep(item.items,
 
                   function(n) {
                     return isMatchedItem(n);
@@ -687,10 +661,10 @@
       }, {
         key: 'fillIcon',
         value: function fillIcon() {
-          var self = this;
+          var that = this;
 
-          if (typeof this.$iconContainer.data('asScrollbar') !== 'undefined') {
-            this.$iconContainer.asScrollbar('destory');
+          if (typeof this.$iconContainer.data('asIconPicker') !== 'undefined') {
+            this.$iconContainer.asIconPicker('destory');
           }
           var tempIcons = [];
           this.iconsAll = [];
@@ -716,11 +690,11 @@
 
           // List icons
           var itemHTML = function itemHTML(item) {
-            self.iconsAll.push(item.value);
+            that.iconsAll.push(item.value);
 
-            return (0, _jQuery2.default)('<li/>', {
-              html: '<i class="' + self.options.extraClass + ' ' + item.value + '" data-value="' + item.value + '"></i>',
-              title: self.options.tooltip ? item.text : ''
+            return (0, _jquery2.default)('<li/>', {
+              html: '<i class="' + that.options.extraClass + ' ' + item.value + '" data-value="' + item.value + '"></i>',
+              title: that.options.tooltip ? item.text : ''
             });
           };
           var $group = void 0;
@@ -731,7 +705,7 @@
             if (typeof item.label !== 'undefined') {
 
               if (item.items.length) {
-                $group = (0, _jQuery2.default)('<div class="' + this.namespace + '-group"><div class="' + this.namespace + '-group-label">' + item.label + ':</div><ul class="' + this.namespace + '-list"></ul></div>').appendTo(this.$iconContainer);
+                $group = (0, _jquery2.default)('<div class="' + this.namespace + '-group"><div class="' + this.namespace + '-group-label">' + item.label + ':</div><ul class="' + this.namespace + '-list"></ul></div>').appendTo(this.$iconContainer);
               }
 
               for (var j = 0, option; option = item.items[j]; j++) {
@@ -741,14 +715,14 @@
               var listClass = this.$iconContainer.children().last().attr('class');
 
               if (listClass !== this.namespace + '-list') {
-                (0, _jQuery2.default)('<ul class="' + this.namespace + '-list"></ul>').appendTo(this.$iconContainer);
+                (0, _jquery2.default)('<ul class="' + this.namespace + '-list"></ul>').appendTo(this.$iconContainer);
               }
               itemHTML(item).appendTo(this.$iconContainer.children().last());
             }
           }
 
           if (this.options.tooltip) {
-            _jQuery2.default.asTooltip.closeAll();
+            _jquery2.default.asTooltip.closeAll();
             this.$iconContainer.find('.' + this.namespace + '-list li').asTooltip({
               namespace: 'asTooltip',
               skin: 'skin-dream',
@@ -756,7 +730,7 @@
             });
           }
 
-          this.index = _jQuery2.default.inArray(this.current, this.iconsAll);
+          this.index = _jquery2.default.inArray(this.current, this.iconsAll);
 
           if (this.index >= 0) {
             this.set(this.current, false);
@@ -766,7 +740,7 @@
 
           // Add the scrollbar in the iconContainer
           this.$iconContainer.asScrollbar({
-            namespace: self.namespace + '-icons'
+            namespace: that.namespace + '-icons'
           });
 
           this._trigger('afterFill');
@@ -813,7 +787,7 @@
               this.value = (liTop + liHeight - ulTop) / containerHeight;
             }
           }
-          this.$iconContainer.asScrollbar('move', this.value, true);
+          this.$iconContainer.asIconPicker('move', this.value, true);
         }
       }, {
         key: 'reset',
@@ -838,9 +812,9 @@
         key: '_open',
         value: function _open() {
           var $selector = this.$wrapper.find('.' + this.namespace + '-selector'),
-            self = this;
+            that = this;
 
-          if (self.options.flat) {
+          if (that.options.flat) {
             $selector.addClass(this.classes.flat);
             $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.flat).removeClass(this.classes.hide);
           } else {
@@ -848,13 +822,13 @@
             $selector.siblings('.' + this.namespace + '-selector-popup').addClass(this.classes.active).removeClass(this.classes.hide);
             this.previous = this.current;
 
-            if ($selector.hasClass(this.classes.active) && !self.options.flat) {
+            if ($selector.hasClass(this.classes.active) && !that.options.flat) {
               this.$iconPicker.find('.' + this.namespace + '-search-input').focus().select();
-              this.$mask = (0, _jQuery2.default)('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
+              this.$mask = (0, _jquery2.default)('<div></div>').addClass(this.classes.mask).appendTo(this.$element.parent());
               this.$mask.on('click',
 
                 function() {
-                  self._hide();
+                  that._hide();
                 }
               );
             }
@@ -869,7 +843,7 @@
           }
 
           if (this.options.keyboard) {
-            _keyboard.destroy(this);
+            keyboard.destroy(this);
           }
 
           this._clearMask();
@@ -889,12 +863,16 @@
       }, {
         key: '_trigger',
         value: function _trigger(eventType) {
+          var _ref;
+
           for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
             params[_key - 1] = arguments[_key];
           }
 
+          var data = (_ref = [this]).concat.apply(_ref, params);
+
           // event
-          this.$element.trigger('asIconPicker::' + eventType, params);
+          this.$element.trigger(NAMESPACE$1 + '::' + eventType, data);
 
           // callback
           eventType = eventType.replace(/\b\w+\b/g,
@@ -906,14 +884,16 @@
           var onFunction = 'on' + eventType;
 
           if (typeof this.options[onFunction] === 'function') {
-            this.options[onFunction].apply(this, params);
+            var _options$onFunction;
+
+            (_options$onFunction = this.options[onFunction]).apply.apply(_options$onFunction, [this].concat(params));
           }
         }
       }, {
         key: '_update',
         value: function _update() {
           this.$element.val(this.val());
-          this._trigger('change', this.current, this.options.name, pluginName);
+          this._trigger('change', [this.current]);
         }
       }, {
         key: 'load',
@@ -948,7 +928,7 @@
           }
 
           this.current = icon;
-          this.index = _jQuery2.default.inArray(this.current, this.iconsAll);
+          this.index = _jquery2.default.inArray(this.current, this.iconsAll);
           this.scrollToSelectedIcon();
 
           if (update !== false) {
@@ -983,7 +963,7 @@
 
           // which element is up to your requirement
           this.$wrapper.removeClass(this.classes.disabled);
-
+          this._trigger('enable');
         // here maybe have some events detached
         }
       }, {
@@ -993,79 +973,99 @@
           // which element is up to your requirement
           // .disabled { pointer-events: none; } NO SUPPORT IE11 BELOW
           this.$wrapper.addClass(this.classes.disabled);
+          this._trigger('disable');
         }
       }, {
         key: 'destory',
         value: function destory() {
           // detached events first
           // then remove all js generated html
-          this.$element.data(pluginName, null);
+          this.$element.data(NAMESPACE$1, null);
           this._trigger('destory');
         }
       }], [{
-        key: '_jQueryInterface',
-        value: function _jQueryInterface(options) {
-          'use strict';
-
-          for (var _len2 = arguments.length, params = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-            params[_key2 - 1] = arguments[_key2];
-          }
-
-          if (typeof options === 'string') {
-            // let method = options;
-
-            if (/^\_/.test(options)) {
-
-              return false;
-            } else if (/^(get)$/.test(options) || options === 'val' && params.length === 0) {
-              var api = this.first().data(pluginName);
-
-              if (api && typeof api[options] === 'function') {
-
-                return api[options].apply(api, params);
-              }
-            } else {
-
-              return this.each(
-
-                function() {
-                  var api = _jQuery2.default.data(this, pluginName);
-
-                  if (api && typeof api[options] === 'function') {
-                    api[options].apply(api, params);
-                  }
-                }
-              );
-            }
-          }
-
-          return this.each(
-
-            function() {
-              if (!_jQuery2.default.data(this, pluginName)) {
-                _jQuery2.default.data(this, pluginName, new asIconPicker(this, options));
-              }
-            }
-          );
+        key: 'setDefaults',
+        value: function setDefaults(options) {
+          _jquery2.default.extend(DEFAULTS, _jquery2.default.isPlainObject(options) && options);
         }
       }]);
 
       return asIconPicker;
     }();
 
-    // Plugin.defaults = defaults;
+    var info = {
+      version: '0.2.0'
+    };
 
-    _jQuery2.default.fn[pluginName] = asIconPicker._jQueryInterface;
-    _jQuery2.default.fn[pluginName].constructor = asIconPicker;
-    _jQuery2.default.fn[pluginName].noConflict = function() {
-      'use strict';
+    var NAMESPACE = 'asIconPicker';
+    var OtherAsIconPicker = _jquery2.default.fn.asIconPicker;
 
-      _jQuery2.default.fn[pluginName] = JQUERY_NO_CONFLICT;
+    var jQueryAsIconPicker = function jQueryAsIconPicker(options) {
+      var _this3 = this;
 
-      return asIconPicker._jQueryInterface;
-    }
-    ;
+      for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
 
-    exports.default = asIconPicker;
+      if (typeof options === 'string') {
+        var _ret = function() {
+          var method = options;
+
+          if (/^_/.test(method)) {
+
+            return {
+              v: false
+            };
+          } else if (/^(get)/.test(method)) {
+            var instance = _this3.first().data(NAMESPACE);
+
+            if (instance && typeof instance[method] === 'function') {
+
+              return {
+                v: instance[method].apply(instance, args)
+              };
+            }
+          } else {
+
+            return {
+              v: _this3.each(
+
+                function() {
+                  var instance = _jquery2.default.data(this, NAMESPACE);
+
+                  if (instance && typeof instance[method] === 'function') {
+                    instance[method].apply(instance, args);
+                  }
+                }
+              )
+            };
+          }
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object")
+
+          return _ret.v;
+      }
+
+      return this.each(
+
+        function() {
+          if (!(0, _jquery2.default)(this).data(NAMESPACE)) {
+            (0, _jquery2.default)(this).data(NAMESPACE, new asIconPicker(this, options));
+          }
+        }
+      );
+    };
+
+    _jquery2.default.fn.asIconPicker = jQueryAsIconPicker;
+
+    _jquery2.default.asIconPicker = _jquery2.default.extend({
+      setDefaults: asIconPicker.setDefaults,
+      noConflict: function noConflict() {
+        _jquery2.default.fn.asIconPicker = OtherAsIconPicker;
+
+        return jQueryAsIconPicker;
+      }
+    }, info);
   }
 );

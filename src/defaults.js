@@ -1,3 +1,4 @@
+/* eslint no-empty-function:"off" */
 export default {
   namespace: 'asIconPicker',
   source: false, // Icons source
@@ -13,7 +14,6 @@ export default {
   heightToScroll: '290',
 
   iconPicker() {
-    'use strict';
     return '<div class="namespace-selector">' +
       '<span class="namespace-selected-icon">' +
       'None selected' +
@@ -27,26 +27,22 @@ export default {
       '</div>';
   },
   iconSearch() {
-    'use strict';
     return '<div class="namespace-selector-search">' +
       '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' +
       '<i class="namespace-search-icon"></i>' +
       '</div>';
   },
   formatNoMatches() {
-    'use strict';
     return 'No matches found';
   },
   errorHanding() {},
   process(value) {
-    'use strict';
     if (value && value.match(this.iconPrefix)) {
       return value.replace(this.iconPrefix, '');
     }
     return value;
   },
   parse(value) {
-    'use strict';
     if (value.match(this.iconPrefix)) {
       return value;
     }

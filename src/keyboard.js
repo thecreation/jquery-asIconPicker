@@ -1,15 +1,12 @@
-let _keyboard : {
+let keyboard = {
   init(self) {
-    'use strict';
     this.attach(self, this.gather(self));
   },
   destroy(self) {
-    'use strict';
     self.$wrapper.off('keydown');
     self.bound = false;
   },
   keys() {
-    'use strict';
     return {
       LEFT: 37,
       UP: 38,
@@ -20,7 +17,6 @@ let _keyboard : {
     };
   },
   horizontalChange(step) {
-    'use strict';
     if (!this.$mask && !this.options.flat) {
       this._open();
       return;
@@ -35,7 +31,6 @@ let _keyboard : {
     this.set(this.current);
   },
   verticalChange(step) {
-    'use strict';
     if (!this.$mask && !this.options.flat) {
       this._open();
       return;
@@ -100,7 +95,6 @@ let _keyboard : {
     this.set(this.current);
   },
   enter() {
-    'use strict';
     if (this.$mask) {
       if (this.current) {
         this.set(this.current);
@@ -111,16 +105,13 @@ let _keyboard : {
     }
   },
   esc() {
-    'use strict';
     this.set(this.previous);
     this._hide();
   },
   tab() {
-    'use strict';
     this._hide();
   },
   gather(self) {
-    'use strict';
     return {
       left: $.proxy(this.horizontalChange, self, '-1'),
       up: $.proxy(this.verticalChange, self, '-1'),
@@ -131,7 +122,6 @@ let _keyboard : {
     };
   },
   press(e) {
-    'use strict';
     const key = e.keyCode || e.which;
 
     if (key === 9) {
@@ -142,18 +132,16 @@ let _keyboard : {
       e.preventDefault();
       return this.map[key].call(this);
     }
-    const self = this;
+    const that = this;
     this.$iconPicker.find(`.${this.namespace}-search-input`).one('keyup', function() {
-      self.searching($(this).val());
+      that.searching($(this).val());
     });
   },
   attach(self, map) {
-    'use strict';
     let key;
-    const _self = this;
     for (key in map) {
       if (map.hasOwnProperty(key)) {
-        const parts = _self._stringSeparate(key, '_'),
+        const parts = this._stringSeparate(key, '_'),
           uppercase = [];
         const len = parts.length;
 
@@ -177,12 +165,11 @@ let _keyboard : {
     if (!self.bound) {
       self.bound = true;
       self.$wrapper.on('keydown', e => {
-        _self.press.call(self, e);
+        this.press.call(self, e);
       });
     }
   },
   _stringSeparate(str, separator) {
-    'use strict';
     const re = new RegExp(`[.\\${separator}\\s].*?`);
     separator = str.match(re);
     const parts = str.split(separator);
@@ -190,4 +177,4 @@ let _keyboard : {
   }
 }
 
-export default _keyboard;
+export default keyboard;

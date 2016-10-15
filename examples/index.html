@@ -1,36 +1,34 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html class="no-js">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title></title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
-
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/prism.css">
-<link rel="stylesheet" href="../dist/css/asIconPicker.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<link rel="stylesheet" href="css/jquery-asTooltip.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="../dist/css/asIconPicker.css">
+  <link rel="stylesheet" href="css/font-awesome.css">
+  <link rel="stylesheet" href="css/jquery-asTooltip.css">
 </head>
 <body>
-	<div id="toc"></div>
-    <div class="container">
-        <div id="toc0"></div>    
-        <h1>jQuery.asIconPicker</h1>
-        <section>
-            <div id="toc1"></div>
-            <h2>Examples</h2>
-            <p>You can pass these options as key/value object to $.asIconPicker() method. </p>
-            
-            <section>
-                <div id="toc2"></div>
-                <h3>default single</h3>
-                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div id="toc"></div>
+  <div class="container">
+    <div id="toc0"></div>
+    <h1>jQuery.asIconPicker</h1>
+    <section>
+      <div id="toc1"></div>
+      <h2>Examples</h2>
+      <p>You can pass these options as key/value object to $.asIconPicker() method. </p>
+      <section>
+        <div id="toc2"></div>
+        <h3>default single</h3>
+        <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
@@ -58,8 +56,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.default').asIconPicker();
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <select id="default" name="default" class="default">
+        <div class="example">
+          <select id="default" name="default" class="default">
                         <option>fa-user</option>
                         <option>fa-search</option>
                         <option>fa-caret-right</option>
@@ -82,12 +80,12 @@
                         <option>fa-caret-left</option>
                         <option>fa-thumbs-up</option>
                     </select>
-                </div>
-            </section>
-            <section>
-                <div id="toc3"></div>
-                <h3>Group</h3>
-                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;group&quot;&nbsp;name=&quot;group&quot;&nbsp;class=&quot;group&quot;&gt;
+        </div>
+      </section>
+      <section>
+        <div id="toc3"></div>
+        <h3>Group</h3>
+        <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;group&quot;&nbsp;name=&quot;group&quot;&nbsp;class=&quot;group&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;optgroup&nbsp;label=&quot;Weather&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-caret-right&quot;&gt;Caret-right&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;fa-caret-down&quot;&gt;Caret-down&lt;/option&gt;
@@ -120,8 +118,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.group').asIconPicker();
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <select id="group" name="group" class="group">
+        <div class="example">
+          <select id="group" name="group" class="group">
                         <optgroup label="Weather">
                             <option value="fa-caret-right">Caret-right</option>
                             <option value="fa-caret-down">Caret-down</option>
@@ -148,12 +146,12 @@
                             <option value="fa-phone-square">Phone-square</option>
                         </optgroup>
                     </select>
-                </div>
-            </section>
-            <section>
-                <div id="toc4"></div>
-                <h3>Load from TEXT input field</h3>
-                <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;default_input&quot;&gt;&lt;/input&gt;
+        </div>
+      </section>
+      <section>
+        <div id="toc4"></div>
+        <h3>Load from TEXT input field</h3>
+        <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;default_input&quot;&gt;&lt;/input&gt;
 &lt;script&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#default_input').asIconPicker(
@@ -171,14 +169,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text':&nbsp;'Bookmark'}]
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <input type="text" name="input" id="default_input"></input>
-                </div>
-            </section>
-            <section>
-                <div id="toc5"></div>
-                <h3>Load from TEXT input field (Group)</h3>
-                <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
+        <div class="example">
+          <input type="text" name="input" id="default_input"></input>
+        </div>
+      </section>
+      <section>
+        <div id="toc5"></div>
+        <h3>Load from TEXT input field (Group)</h3>
+        <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
 &lt;script&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#group_input').asIconPicker(
@@ -189,18 +187,18 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <input type="text" name="input" id="group_input"></input>
-                </div>
-            </section>
-        </section>
-        <section>
-            <span id="toc6"></span>
-            <h2>API</h2>
-            <section>
-                <span id="toc7"></span>
-                <h3>Flat</h3>
-                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;name=&quot;default&quot;&nbsp;class=&quot;flat&quot;&gt;
+        <div class="example">
+          <input type="text" name="input" id="group_input"></input>
+        </div>
+      </section>
+    </section>
+    <section>
+      <span id="toc6"></span>
+      <h2>API</h2>
+      <section>
+        <span id="toc7"></span>
+        <h3>Flat</h3>
+        <pre class="has-example"><code class="language-markup">&lt;select&nbsp;name=&quot;default&quot;&nbsp;class=&quot;flat&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
@@ -228,8 +226,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.flat').asIconPicker({flat:&nbsp;true});
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <select name="default" class="flat">
+        <div class="example">
+          <select name="default" class="flat">
                         <option>fa-user</option>
                         <option>fa-search</option>
                         <option>fa-caret-right</option>
@@ -252,12 +250,12 @@
                         <option>fa-caret-left</option>
                         <option>fa-thumbs-up</option>
                     </select>
-                </div>
-            </section>
-            <section>
-                <span id="toc8"></span>
-                <h3>Get()</h3>
-                <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
+        </div>
+      </section>
+      <section>
+        <span id="toc8"></span>
+        <h3>Get()</h3>
+        <pre class="has-example"><code class="language-markup">&lt;select&nbsp;id=&quot;default&quot;&nbsp;name=&quot;default&quot;&nbsp;class=&quot;default&quot;&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-user&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-search&lt;/option&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;fa-caret-right&lt;/option&gt;
@@ -285,8 +283,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#getIcon').asIconPicker();
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <select id="getIcon" name="default" class="getIcon">
+        <div class="example">
+          <select id="getIcon" name="default" class="getIcon">
                         <option>fa-user</option>
                         <option>fa-search</option>
                         <option>fa-caret-right</option>
@@ -309,14 +307,14 @@
                         <option>fa-caret-left</option>
                         <option>fa-thumbs-up</option>
                     </select>
-                    <button id="api-get-click">getIcon</button>
-                </div>
-                <div class="example" id="api-get-info"></div>
-            </section>
-            <section>
-                <div id="toc9"></div>
-                <h3>Load()</h3>
-                <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
+          <button id="api-get-click">getIcon</button>
+        </div>
+        <div class="example" id="api-get-info"></div>
+      </section>
+      <section>
+        <div id="toc9"></div>
+        <h3>Load()</h3>
+        <pre class="has-example"><code class="language-markup">&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;input&quot;&nbsp;id=&quot;group_input&quot;&gt;&lt;/input&gt;
 &lt;script&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;$(document).ready(function(){
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#group_input').asIconPicker(
@@ -327,62 +325,66 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]
 &nbsp;&nbsp;&nbsp;&nbsp;});
 &lt;/script&gt;</code></pre>
-                <div class="example">
-                    <input type="text" name="input" id="loadFile"></input>
-                    <a id="api-load-click" href="#">Load icon from .json file</a>
-                </div>
-            </section>
-        </section>
-    </div> 
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.toc.min.js"></script>
-    <script src="js/prism.js"></script>
-    <script src="js/jquery-asTooltip.js"></script>
-    <script src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/jquery-asScrollbar.min.js"></script>
-    <script src="../dist/jquery-asIconPicker.js"></script>
-    <script>
-        $(document).ready(function(){
-            (function(){
-                $('#toc').toc();
-            })();
-            $('.default').asIconPicker();
-            $('.group').asIconPicker();
-            $('#default_input').asIconPicker({
-                source: {'fa-caret-right': 'Caret-right',
-                         'fa-star': 'Star',
-                         'fa-heart': 'Heart',
-                         'fa-cloud-upload': 'Cloud-upload',
-                         'fa-phone-square': 'Phone-square',
-                         'fa-bookmark': 'Bookmark'}
-            });
-            $('#group_input').asIconPicker({
-                source: [{'label':   'Weather',
-                          'items': ['fa-caret-right', 'fa-star', 'fa-heart', 'fa-cloud-upload', 'fa-phone-square', 'fa-bookmark']},
-                         {'label':   'Commerce',
-                          'items': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
-                        }]
-            });
-            $('.flat').asIconPicker({flat: true});
-            $('#getIcon').asIconPicker();
-            $('#api-get-click').click(function() {
-                var html = '<div>Your choice is "' + $('#getIcon').asIconPicker('get') + '"</div>';
-                $(html).prependTo($('#api-get-info'));
-                return false;
-            });
-            $('#loadFile').asIconPicker();
-            $('#api-load-click').click(function() {
-                $.ajax({
-                    url:             'json/icon.json',
-                    dataType:        'json'
-                }).done(function(s) {
-                    $('#loadFile').asIconPicker('load', s);
-                });
-
-                // $('#loadFile').asIconPicker('load', source);
-                return false;
-            })
+        <div class="example">
+          <input type="text" name="input" id="loadFile"></input>
+          <a id="api-load-click" href="#">Load icon from .json file</a>
+        </div>
+      </section>
+    </section>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.toc.min.js"></script>
+  <script src="js/prism.js"></script>
+  <script src="js/jquery-asTooltip.js"></script>
+  <script src="js/jquery-asScrollbar.js"></script>
+  <script src="../dist/jquery-asIconPicker.js"></script>
+  <script>
+    $(document).ready(function() {
+      (function() {
+        $('#toc').toc();
+      })();
+      $('.default').asIconPicker();
+      $('.group').asIconPicker();
+      $('#default_input').asIconPicker({
+        source: {
+          'fa-caret-right': 'Caret-right',
+          'fa-star': 'Star',
+          'fa-heart': 'Heart',
+          'fa-cloud-upload': 'Cloud-upload',
+          'fa-phone-square': 'Phone-square',
+          'fa-bookmark': 'Bookmark'
+        }
+      });
+      $('#group_input').asIconPicker({
+        source: [{
+          'label': 'Weather',
+          'items': ['fa-caret-right', 'fa-star', 'fa-heart', 'fa-cloud-upload', 'fa-phone-square', 'fa-bookmark']
+        }, {
+          'label': 'Commerce',
+          'items': ['fa-user', 'fa-search', 'fa-rocket', 'fa-times', 'fa-refresh', 'fa-adn']
+        }]
+      });
+      $('.flat').asIconPicker({
+        flat: true
+      });
+      $('#getIcon').asIconPicker();
+      $('#api-get-click').click(function() {
+        var html = '<div>Your choice is "' + $('#getIcon').asIconPicker('get') + '"</div>';
+        $(html).prependTo($('#api-get-info'));
+        return false;
+      });
+      $('#loadFile').asIconPicker();
+      $('#api-load-click').click(function() {
+        $.ajax({
+          url: 'json/icon.json',
+          dataType: 'json'
+        }).done(function(s) {
+          $('#loadFile').asIconPicker('load', s);
         });
-    </script>
+        // $('#loadFile').asIconPicker('load', source);
+        return false;
+      })
+    });
+  </script>
 </body>
 </html>

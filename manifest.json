@@ -1,0 +1,13 @@
+{
+  "dest": "examples",
+  "packages": {
+    "npm:jquery": true,
+    "npm:normalize.css": true,
+    "npm:prismjs":true,
+    "npm:font-awesome":{
+      "fonts": "fonts",
+      "css": "css"
+    },
+    "npm:jquery-asScrollbar":true
+  }
+}

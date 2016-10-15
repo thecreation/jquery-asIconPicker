@@ -12,12 +12,11 @@ export default {
       description: pkg.description,
       author: pkg.author,
       banner: `/**
-* ${pkg.title}
-* ${pkg.description}
-* Compiled: ${Date()}
-* @version v${pkg.version}
-* @link ${pkg.homepage}
-* @copyright ${pkg.license}
+* ${pkg.title} v${pkg.version}
+* ${pkg.homepage}
+*
+* Copyright (c) ${pkg.author.name}
+* Released under the ${pkg.license} license
 */
 `,
       // basic locations
@@ -26,9 +25,11 @@ export default {
         srcDir: `${src}/`,
         destDir: `${dest}/`,
       },
+
       styles: {
         files: '**/*.scss',
         src: `${src}/scss`,
+
         dest: `${dest}/css`,
         prodSourcemap: false,
         sassIncludePaths: [],
@@ -36,8 +37,10 @@ export default {
           browsers: ['last 2 versions', 'ie >= 9', 'Android >= 2.3']
         }
       },
+
       scripts: {
-        entry: 'jquery-asIconPicker.js',
+        entry: 'main.js',
+        version: 'info.js',
         files: '**/*.js',
         src: `${src}`,
         dest: `${dest}`,
@@ -45,11 +48,13 @@ export default {
         test: './test',
         gulp: './gulp'
       },
+
       fonts: {
         files: '**/*.ttf',
         src: `${src}/fonts`,
         dest: `${dest}/fonts`
       },
+
       archive: {
         src: `${dest}/**/*`,
         dest: './archives/',
@@ -58,7 +63,7 @@ export default {
 
       browser: {
         baseDir: './',
-        startPath: "demo/index.html",
+        startPath: "examples/index.html",
         browserPort: 3000,
         UIPort: 3001,
         testPort: 3002,

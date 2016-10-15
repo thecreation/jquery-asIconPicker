@@ -1,17 +1,17 @@
 /**
-* jQuery asIconPicker
-* a jquery plugin
-* Compiled: Tue Aug 16 2016 11:42:02 GMT+0800 (CST)
-* @version v0.1.0
-* @link https://github.com/amazingSurge/jquery-asIconPicker
-* @copyright LGPL-3.0
+* jQuery asIconPicker v0.2.0
+* https://github.com/amazingSurge/jquery-asIconPicker
+*
+* Copyright (c) amazingSurge
+* Released under the LGPL-3.0 license
 */
 @font-face {
   font-family: "asFont";
+  font-style: normal; 
+  font-weight: normal;
+
   src: url("../fonts/asFont.eot");
   src: url("../fonts/asFont.eot") format("embedded-opentype"), url("../fonts/asFont.woff") format("woff"), url("../fonts/asFont.ttf") format("truetype"), url("../fonts/asFont.svg") format("svg");
-  font-weight: normal;
-  font-style: normal;
 }
 
 [class^="asIcon-"], [class*=" asIcon-"] {
@@ -21,6 +21,7 @@
   font-variant: normal;
   line-height: 1;
   text-transform: none;
+
   speak: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -191,13 +192,13 @@
   display: inline-block;
   width: 304px;
   font-size: 20px;
-  color: #999999;
-  background-color: #ffffff;
+  color: #999;
+  background-color: #fff;
 }
 
 .asIconPicker-selector {
   position: relative;
-  border: 2px solid #bbbbbb;
+  border: 2px solid #bbb;
 }
 .asIconPicker-selector .asIconPicker-selected-icon {
   display: block;
@@ -225,8 +226,9 @@
   font-weight: normal;
   font-variant: normal;
   line-height: 1;
-  color: #bbbbbb;
+  color: #bbb;
   text-transform: none;
+
   -moz-osx-font-smoothing: grayscale;
   speak: none;
   -webkit-font-smoothing: antialiased;
@@ -242,7 +244,7 @@
 }
 
 .asIconPicker-none-selected {
-  color: #dddddd;
+  color: #ddd;
 }
 
 .asIconPicker-selector-popup {
@@ -251,9 +253,9 @@
   left: 0;
   z-index: 99;
   -webkit-box-sizing: border-box;
-     box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 2px solid #e5e5e5;
 }
 .asIconPicker-selector-popup.asIconPicker_isFlat {
@@ -275,10 +277,10 @@
 
 .asIconPicker_disable {
   pointer-events: none !important;
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 .asIconPicker_disable .asIconPicker-selector {
-  border-color: #dddddd;
+  border-color: #ddd;
 }
 
 .asIconPicker_with_search .asIconPicker-selector-search {
@@ -288,14 +290,14 @@
   z-index: 1;
   display: block;
   width: 280px;
-  width:         calc(100% - 20px);
+  width: calc(100% - 20px);
   height: 36px;
   padding: 10px;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 .asIconPicker_with_search .asIconPicker-selector-search .asIconPicker-search-input {
   -webkit-box-sizing: border-box;
-     box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   padding-right: 40px;
@@ -317,6 +319,7 @@
   color: rgba(0, 0, 0, .2);
   text-transform: none;
   cursor: pointer;
+
   -moz-osx-font-smoothing: grayscale;
   speak: none;
   -webkit-font-smoothing: antialiased;
@@ -330,15 +333,16 @@
 
 .asIconPicker_with_search .asIconPicker-icons-container {
   -webkit-box-sizing: border-box;
-     box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
   margin-top: 55px;
   overflow: auto;
 }
 .asIconPicker_with_search .asIconPicker-icons-container.is-scrolled {
-  -web-box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset; 
+
+  -web-box-shadow: 0 1px 4px rgba(0, 0, 0, .08) inset;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-icons-wrapper {
   max-height: 314px;
@@ -355,7 +359,7 @@
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-group .asIconPicker-group-label {
   margin-bottom: 9px;
   font-size: 16px;
-  color: #777777;
+  color: #777;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-list {
   padding: 0;
@@ -366,7 +370,7 @@
   z-index: 1;
   display: inline-block;
   width: 55px;
-  width:         calc(20% - 1px);
+  width: calc(20% - 1px);
   height: 55px;
   margin-top: -1px;
   margin-left: -1px;
@@ -379,12 +383,12 @@
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-list li.asIconPicker-current {
   z-index: 9;
-  color: #ffffff;
+  color: #fff;
   background-color: #5cafda;
   border-color: #5cafda;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-list li.asIconPicker-current:hover {
-  color: #ffffff;
+  color: #fff;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-list li.asIconPicker_hover {
   color: #6a6f76;
@@ -410,7 +414,7 @@
   left: 0;
   line-height: 0;
   cursor: pointer;
-  background: #dddddd;
+  background: #ddd;
   border-radius: 4px;
 }
 .asIconPicker_with_search .asIconPicker-icons-container .asIconPicker-icons-scrollbar.asIconPicker-icons-vertical {
@@ -427,7 +431,7 @@
   padding: 20px 0;
   margin: 0 auto;
   font-size: 24px;
-  color: #eeeeee;
+  color: #eee;
   text-align: center;
 }
 .asIconPicker_with_search .asIconPicker-loading > i {
@@ -437,6 +441,7 @@
   font-variant: normal;
   line-height: 1;
   text-transform: none;
+
   speak: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
