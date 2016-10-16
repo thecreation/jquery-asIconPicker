@@ -1,5 +1,5 @@
 /**
-* jQuery asIconPicker v0.2.1
+* jQuery asIconPicker v0.2.2
 * https://github.com/amazingSurge/jquery-asIconPicker
 *
 * Copyright (c) amazingSurge
@@ -797,7 +797,7 @@ class asIconPicker {
 }
 
 var info = {
-  version:'0.2.1'
+  version:'0.2.2'
 };
 
 const NAMESPACE = 'asIconPicker';
@@ -809,7 +809,7 @@ const jQueryAsIconPicker = function(options, ...args) {
 
     if (/^_/.test(method)) {
       return false;
-    } else if ((/^(get)/.test(method))) {
+    } else if ((/^(get)$/.test(method)) || (method === 'val' && method_arguments.length === 0)) {
       const instance = this.first().data(NAMESPACE);
       if (instance && typeof instance[method] === 'function') {
         return instance[method](...args);
