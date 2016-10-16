@@ -245,8 +245,8 @@ Event   | Description
 ------- | -----------
 init    | Fires when the instance is setup for the first time.
 ready   | Fires when the instance is ready for API use.
-enable  | This event is fired immediately when the `enable` instance method has been called.
-disable | This event is fired immediately when the `disable` instance method has been called.
+enable  | Fired when the `enable` instance method has been called.
+disable | Fired when the `disable` instance method has been called.
 destroy | Fires when an instance is destroyed. 
 
 ## No conflict

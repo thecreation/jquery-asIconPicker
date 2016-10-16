@@ -6,8 +6,12 @@
     "npm:prismjs":true,
     "npm:font-awesome":{
       "fonts": "fonts",
-      "css": "css"
+      "css": "css/*.min.css"
     },
-    "npm:jquery-asScrollbar":true
+    "npm:jquery-asScrollbar":true,
+    "npm:jquery-asTooltip":{
+      "js": "dist/*.min.js",
+      "css": "dist/css/*.min.css"
+    }
   }
 }

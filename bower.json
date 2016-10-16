@@ -1,6 +1,6 @@
 {
   "name": "jquery-asIconPicker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A jquery plugin that for pick a icon.",
   "main": "dist/jquery-asIconPicker.js",
   "copyright": "amazingSurge",

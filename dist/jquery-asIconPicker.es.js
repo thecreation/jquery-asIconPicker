@@ -1,5 +1,5 @@
 /**
-* jQuery asIconPicker v0.2.0
+* jQuery asIconPicker v0.2.1
 * https://github.com/amazingSurge/jquery-asIconPicker
 *
 * Copyright (c) amazingSurge
@@ -22,7 +22,7 @@ var DEFAULTS = {
   flat: false,
   heightToScroll: '290',
 
-  iconPicker() {
+  iconPicker: function() {
     return '<div class="namespace-selector">' +
       '<span class="namespace-selected-icon">' +
       'None selected' +
@@ -35,23 +35,23 @@ var DEFAULTS = {
       '<div class="namespace-icons-container"></div>' +
       '</div>';
   },
-  iconSearch() {
+  iconSearch: function() {
     return '<div class="namespace-selector-search">' +
       '<input type="text" name="" value="" placeholder="searchText" class="namespace-search-input"/>' +
       '<i class="namespace-search-icon"></i>' +
       '</div>';
   },
-  formatNoMatches() {
+  formatNoMatches: function() {
     return 'No matches found';
   },
-  errorHanding() {},
-  process(value) {
+  errorHanding: function() {},
+  process: function(value) {
     if (value && value.match(this.iconPrefix)) {
       return value.replace(this.iconPrefix, '');
     }
     return value;
   },
-  parse(value) {
+  parse: function(value) {
     if (value.match(this.iconPrefix)) {
       return value;
     }
@@ -797,7 +797,7 @@ class asIconPicker {
 }
 
 var info = {
-  version:'0.2.0'
+  version:'0.2.1'
 };
 
 const NAMESPACE = 'asIconPicker';

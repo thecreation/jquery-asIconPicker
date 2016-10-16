@@ -1,5 +1,5 @@
 /**
-* jQuery asIconPicker v0.2.0
+* jQuery asIconPicker v0.2.1
 * https://github.com/amazingSurge/jquery-asIconPicker
 *
 * Copyright (c) amazingSurge
@@ -112,7 +112,6 @@
 
         return this.iconPrefix + value;
       },
-
       // callback
       onInit: null,
       onReady: null,
@@ -994,7 +993,7 @@
     }();
 
     var info = {
-      version: '0.2.0'
+      version: '0.2.1'
     };
 
     var NAMESPACE = 'asIconPicker';
