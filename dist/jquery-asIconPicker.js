@@ -1,5 +1,5 @@
 /**
-* jQuery asIconPicker v0.2.2
+* jQuery asIconPicker v0.2.3
 * https://github.com/amazingSurge/jquery-asIconPicker
 *
 * Copyright (c) amazingSurge
@@ -663,7 +663,7 @@
           var that = this;
 
           if (typeof this.$iconContainer.data('asIconPicker') !== 'undefined') {
-            this.$iconContainer.asIconPicker('destory');
+            this.$iconContainer.asIconPicker('destroy');
           }
           var tempIcons = [];
           this.iconsAll = [];
@@ -862,13 +862,11 @@
       }, {
         key: '_trigger',
         value: function _trigger(eventType) {
-          var _ref;
-
           for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
             params[_key - 1] = arguments[_key];
           }
 
-          var data = (_ref = [this]).concat.apply(_ref, params);
+          var data = [this].concat(params);
 
           // event
           this.$element.trigger(NAMESPACE$1 + '::' + eventType, data);
@@ -883,16 +881,14 @@
           var onFunction = 'on' + eventType;
 
           if (typeof this.options[onFunction] === 'function') {
-            var _options$onFunction;
-
-            (_options$onFunction = this.options[onFunction]).apply.apply(_options$onFunction, [this].concat(params));
+            this.options[onFunction].apply(this, params);
           }
         }
       }, {
         key: '_update',
         value: function _update() {
           this.$element.val(this.val());
-          this._trigger('change', [this.current]);
+          this._trigger('change', this.current);
         }
       }, {
         key: 'load',
@@ -975,12 +971,12 @@
           this._trigger('disable');
         }
       }, {
-        key: 'destory',
-        value: function destory() {
+        key: 'destroy',
+        value: function destroy() {
           // detached events first
           // then remove all js generated html
           this.$element.data(NAMESPACE$1, null);
-          this._trigger('destory');
+          this._trigger('destroy');
         }
       }], [{
         key: 'setDefaults',
@@ -993,7 +989,7 @@
     }();
 
     var info = {
-      version: '0.2.2'
+      version: '0.2.3'
     };
 
     var NAMESPACE = 'asIconPicker';
@@ -1015,7 +1011,7 @@
             return {
               v: false
             };
-          } else if (/^(get)$/.test(method) || method === 'val' && method_arguments.length === 0) {
+          } else if (/^(get)$/.test(method) || method === 'val' && args.length === 0) {
             var instance = _this3.first().data(NAMESPACE);
 
             if (instance && typeof instance[method] === 'function') {

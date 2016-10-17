@@ -2,7 +2,7 @@
   "name": "jquery-asIconPicker",
   "title": "jQuery asIconPicker",
   "description": "A jquery plugin that for pick a icon.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/amazingSurge/jquery-asIconPicker",
   "author": {
     "name": "amazingSurge",
@@ -123,7 +123,7 @@
   },
   "dependencies": {
     "jquery": ">=2.2.0",
-    "jquery-asScrollbar": "^0.5.3",
-    "jquery-asTooltip": "^0.4.1"
+    "jquery-asScrollbar": "^0.5.4",
+    "jquery-asTooltip": "^0.4.2"
   }
 }

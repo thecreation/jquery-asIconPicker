@@ -46,6 +46,11 @@ bower install jquery-asIconPicker --save
 npm install jquery-asIconPicker --save
 ```
 
+#### Install From Yarn
+```sh
+yarn add jquery-asIconPicker
+```
+
 #### Build From Source
 If you want build from source:
 
@@ -178,11 +183,11 @@ You can also save the instances to variable for further use.
 
 ```javascript
 // call directly
-$().asIconPicker('destory');
+$().asIconPicker('destroy');
 
 // or
 var api = $().data('asIconPicker');
-api.destory();
+api.destroy();
 ```
 
 #### get()

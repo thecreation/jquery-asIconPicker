@@ -278,7 +278,7 @@ class asIconPicker {
   fillIcon() {
     const that = this;
     if (typeof this.$iconContainer.data('asIconPicker') !== 'undefined') {
-      this.$iconContainer.asIconPicker('destory');
+      this.$iconContainer.asIconPicker('destroy');
     }
     let tempIcons = [];
     this.iconsAll = [];
@@ -451,7 +451,7 @@ class asIconPicker {
   }
 
   _trigger(eventType, ...params) {
-    let data = [this].concat(...params);
+    let data = [this].concat(params);
 
     // event
     this.$element.trigger(`${NAMESPACE}::${eventType}`, data);
@@ -463,13 +463,13 @@ class asIconPicker {
     let onFunction = `on${eventType}`;
 
     if (typeof this.options[onFunction] === 'function') {
-      this.options[onFunction].apply(this, ...params);
+      this.options[onFunction].apply(this, params);
     }
   }
 
   _update() {
     this.$element.val(this.val());
-    this._trigger('change', [this.current]);
+    this._trigger('change', this.current);
   }
 
   load(source) {
@@ -544,11 +544,11 @@ class asIconPicker {
     this._trigger('disable');
   }
 
-  destory() {
+  destroy() {
     // detached events first
     // then remove all js generated html
     this.$element.data(NAMESPACE, null);
-    this._trigger('destory');
+    this._trigger('destroy');
   }
 
   static setDefaults(options) {

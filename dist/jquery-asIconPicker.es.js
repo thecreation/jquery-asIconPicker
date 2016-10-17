@@ -1,5 +1,5 @@
 /**
-* jQuery asIconPicker v0.2.2
+* jQuery asIconPicker v0.2.3
 * https://github.com/amazingSurge/jquery-asIconPicker
 *
 * Copyright (c) amazingSurge
@@ -518,7 +518,7 @@ class asIconPicker {
   fillIcon() {
     const that = this;
     if (typeof this.$iconContainer.data('asIconPicker') !== 'undefined') {
-      this.$iconContainer.asIconPicker('destory');
+      this.$iconContainer.asIconPicker('destroy');
     }
     let tempIcons = [];
     this.iconsAll = [];
@@ -691,7 +691,7 @@ class asIconPicker {
   }
 
   _trigger(eventType, ...params) {
-    let data = [this].concat(...params);
+    let data = [this].concat(params);
 
     // event
     this.$element.trigger(`${NAMESPACE$1}::${eventType}`, data);
@@ -703,13 +703,13 @@ class asIconPicker {
     let onFunction = `on${eventType}`;
 
     if (typeof this.options[onFunction] === 'function') {
-      this.options[onFunction].apply(this, ...params);
+      this.options[onFunction].apply(this, params);
     }
   }
 
   _update() {
     this.$element.val(this.val());
-    this._trigger('change', [this.current]);
+    this._trigger('change', this.current);
   }
 
   load(source) {
@@ -784,11 +784,11 @@ class asIconPicker {
     this._trigger('disable');
   }
 
-  destory() {
+  destroy() {
     // detached events first
     // then remove all js generated html
     this.$element.data(NAMESPACE$1, null);
-    this._trigger('destory');
+    this._trigger('destroy');
   }
 
   static setDefaults(options) {
@@ -797,7 +797,7 @@ class asIconPicker {
 }
 
 var info = {
-  version:'0.2.2'
+  version:'0.2.3'
 };
 
 const NAMESPACE = 'asIconPicker';
@@ -809,7 +809,7 @@ const jQueryAsIconPicker = function(options, ...args) {
 
     if (/^_/.test(method)) {
       return false;
-    } else if ((/^(get)$/.test(method)) || (method === 'val' && method_arguments.length === 0)) {
+    } else if ((/^(get)$/.test(method)) || (method === 'val' && args.length === 0)) {
       const instance = this.first().data(NAMESPACE);
       if (instance && typeof instance[method] === 'function') {
         return instance[method](...args);
